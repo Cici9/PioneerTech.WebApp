@@ -88,6 +88,16 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PioneerTechSystem.DAL\PioneerTechSystem.DAL.csproj">
+      <Project>{75782ff8-d2bb-4bab-8c6f-543e938c08e6}</Project>
+      <Name>PioneerTechSystem.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PioneerTechSystem.Models\PioneerTechSystem.Models.csproj">
+      <Project>{d78b419f-4aa0-46b4-abb1-0e347df0e144}</Project>
+      <Name>PioneerTechSystem.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
