@@ -31,6 +31,42 @@ namespace PioneerTech.WebApp.UI {
         protected global::System.Web.UI.HtmlControls.HtmlForm MasterPage;
         
         /// <summary>
+        /// HomeMenuOption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HomeMenuOption;
+        
+        /// <summary>
+        /// ServicesMenuOption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink ServicesMenuOption;
+        
+        /// <summary>
+        /// AboutMenuOption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink AboutMenuOption;
+        
+        /// <summary>
+        /// ContactMenuOption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink ContactMenuOption;
+        
+        /// <summary>
         /// BodyContentPlaceHolder control.
         /// </summary>
         /// <remarks>

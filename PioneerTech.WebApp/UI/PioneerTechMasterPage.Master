@@ -4,28 +4,42 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <link rel="stylesheet" href="../Content/MasterPageStyleSheet.css" />
+    <link rel="stylesheet" href="../Content/MainMasterPageStyleSheet.css" />
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="MasterPage" runat="server">
-        <div id="Header" class="Header">
+        <div id="Header" class="header">
+            <div class="header-content">
             <h1>Pioneer Technologies Inc</h1>
             <h2>Efficiency and Innovation</h2>
+                </div>
         </div>
-        <div id="NavigationPanal" class="Navigation">
-
+        <div class="body-content">
+        <div id="NavigationPanal" class="navigation">
+            <asp:HyperLink ID="HomeMenuOption" NavigateUrl="~/UI/Home.aspx" runat="server">Home</asp:HyperLink>
+                    <br />
+            <asp:HyperLink ID="ServicesMenuOption" NavigateUrl="~/UI/Services.aspx" runat="server">Services</asp:HyperLink>
+                    <br />
+            <asp:HyperLink ID="AboutMenuOption" NavigateUrl="~/UI/About.aspx" runat="server">About</asp:HyperLink>
+                   <br />
+            <asp:HyperLink ID="ContactMenuOption" NavigateUrl="~/UI/Contact.aspx" runat="server">Contact</asp:HyperLink>
+                   <br />
         </div>
-        <div id="Footer" class="Footer">
-            &copy; 2010 Pioneer Technologies Inc. All rights reserved.
-        </div>
-        <div id="Content" class="Content">
+        <div id="Content" class="content">
             <asp:ContentPlaceHolder ID="BodyContentPlaceHolder" runat="server">
         
                     </asp:ContentPlaceHolder>
         </div>
+        </div>
+        <div id="Footer" class="footer">
+            <div class="FooterContent">
+            &copy; 2017 Pioneer Technologies Inc. All rights reserved.
+                </div>
+        </div>
+        
     </form>    
 </body>
 </html>

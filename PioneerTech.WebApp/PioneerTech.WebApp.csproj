@@ -67,6 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="UI\About.aspx" />
+    <Content Include="UI\Contact.aspx" />
     <Content Include="UI\PioneerTechMasterPage.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -76,10 +78,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\MasterPageStyleSheet.css" />
+    <Content Include="Content\MainMasterPageStyleSheet.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="UI\Home.aspx" />
+    <Content Include="UI\Services.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +90,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -100,6 +117,13 @@
     </Compile>
     <Compile Include="UI\PioneerTechMasterPage.Master.designer.cs">
       <DependentUpon>PioneerTechMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Services.aspx.cs">
+      <DependentUpon>Services.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Services.aspx.designer.cs">
+      <DependentUpon>Services.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

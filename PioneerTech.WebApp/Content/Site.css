@@ -1,1 +1,76 @@
-﻿
+﻿/*body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans';
+}
+.Header
+{
+    height: 20%;
+    width: 100%;
+
+    background-color: #1a1816;
+    color: Orange;
+    margin-top: -20px;
+}
+.header-content{
+    margin-left: 20%;
+    margin-right:20%;
+}
+.Header h2
+{
+    font-style: italic;
+}
+.body-content{
+}
+.Footer {
+    height: 20%;
+    width: 100%;
+    background-color: #1a1816;
+    color: Orange;
+    position:fixed;
+    top:90%;    
+}
+.FooterContent{    
+    margin-left:20%;
+}
+.Navigation {
+    position:fixed;
+    height: 70%;
+    width: 25%;    
+    padding: 0;
+    border-radius: 2px;
+    color: #1a1816;
+    background-color: orange;    
+    font-size:24px;
+}
+.MenuOption
+{
+    color: #1a1816;
+    background-color: orange;
+    text-decoration: none;
+    border-radius: 10px;
+    width: 150px;
+}
+.MenuOption:link
+{    
+    color: #1a1816;
+    text-decoration: none;
+}
+.MenuOption:hover
+{
+    color: #1a1816;
+    text-decoration: underline;
+}
+.MenuOption:visited
+{
+    color: #1a1816;
+    text-decoration: none;
+    color:#1a1816;
+}
+.Content{
+    position:fixed;
+    height: 60%;
+    width: 60%;
+    top: 20%;
+    margin-left:200px;
+}*/
