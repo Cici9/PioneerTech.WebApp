@@ -1,0 +1,31 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PioneerTechMasterPage.Master.cs" Inherits="PioneerTech.WebApp.UI.PioneerTechMastePage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link rel="stylesheet" href="../Content/MasterPageStyleSheet.css" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="MasterPage" runat="server">
+        <div id="Header" class="Header">
+            <h1>Pioneer Technologies Inc</h1>
+            <h2>Efficiency and Innovation</h2>
+        </div>
+        <div id="NavigationPanal" class="Navigation">
+
+        </div>
+        <div id="Footer" class="Footer">
+            &copy; 2010 Pioneer Technologies Inc. All rights reserved.
+        </div>
+        <div id="Content" class="Content">
+            <asp:ContentPlaceHolder ID="BodyContentPlaceHolder" runat="server">
+        
+                    </asp:ContentPlaceHolder>
+        </div>
+    </form>    
+</body>
+</html>
