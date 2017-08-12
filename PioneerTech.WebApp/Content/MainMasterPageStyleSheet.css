@@ -21,7 +21,8 @@ body{
 
 .navigation {
     height: 70%;
-    width: 20%;
+    width: auto;
+    padding: 10px;
     background-color:orange;
     top : 20%;
     position:fixed;

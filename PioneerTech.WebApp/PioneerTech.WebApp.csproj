@@ -68,7 +68,11 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="UI\About.aspx" />
+    <Content Include="UI\CompanyDetails.aspx" />
     <Content Include="UI\Contact.aspx" />
+    <Content Include="UI\EducationDetails.aspx" />
+    <Content Include="UI\EmployeeDetails.aspx" />
+    <Content Include="UI\EmployeeInformation.aspx" />
     <Content Include="UI\PioneerTechMasterPage.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -82,7 +86,11 @@
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="UI\Home.aspx" />
+    <Content Include="UI\ProjectDetails.aspx" />
+    <Content Include="UI\ProjectInformation.aspx" />
     <Content Include="UI\Services.aspx" />
+    <Content Include="UI\TechnicalDetails.aspx" />
+    <Content Include="UI\ViewEmployeeDetails.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -97,12 +105,40 @@
     <Compile Include="UI\About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UI\CompanyDetails.aspx.cs">
+      <DependentUpon>CompanyDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\CompanyDetails.aspx.designer.cs">
+      <DependentUpon>CompanyDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI\Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UI\Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\EducationDetails.aspx.cs">
+      <DependentUpon>EducationDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\EducationDetails.aspx.designer.cs">
+      <DependentUpon>EducationDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\EmployeeDetails.aspx.cs">
+      <DependentUpon>EmployeeDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\EmployeeDetails.aspx.designer.cs">
+      <DependentUpon>EmployeeDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\EmployeeInformation.aspx.cs">
+      <DependentUpon>EmployeeInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\EmployeeInformation.aspx.designer.cs">
+      <DependentUpon>EmployeeInformation.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -118,12 +154,40 @@
     <Compile Include="UI\PioneerTechMasterPage.Master.designer.cs">
       <DependentUpon>PioneerTechMasterPage.Master</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProjectDetails.aspx.cs">
+      <DependentUpon>ProjectDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\ProjectDetails.aspx.designer.cs">
+      <DependentUpon>ProjectDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProjectInformation.aspx.cs">
+      <DependentUpon>ProjectInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\ProjectInformation.aspx.designer.cs">
+      <DependentUpon>ProjectInformation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI\Services.aspx.cs">
       <DependentUpon>Services.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UI\Services.aspx.designer.cs">
       <DependentUpon>Services.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TechnicalDetails.aspx.cs">
+      <DependentUpon>TechnicalDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\TechnicalDetails.aspx.designer.cs">
+      <DependentUpon>TechnicalDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ViewEmployeeDetails.aspx.cs">
+      <DependentUpon>ViewEmployeeDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\ViewEmployeeDetails.aspx.designer.cs">
+      <DependentUpon>ViewEmployeeDetails.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

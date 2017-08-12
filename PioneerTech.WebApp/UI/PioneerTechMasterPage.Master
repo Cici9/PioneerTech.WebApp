@@ -19,19 +19,32 @@
         </div>
         <div class="body-content">
         <div id="NavigationPanal" class="navigation">
-            <asp:HyperLink ID="HomeMenuOption" NavigateUrl="~/UI/Home.aspx" runat="server">Home</asp:HyperLink>
-                    <br />
-            <asp:HyperLink ID="ServicesMenuOption" NavigateUrl="~/UI/Services.aspx" runat="server">Services</asp:HyperLink>
-                    <br />
-            <asp:HyperLink ID="AboutMenuOption" NavigateUrl="~/UI/About.aspx" runat="server">About</asp:HyperLink>
-                   <br />
-            <asp:HyperLink ID="ContactMenuOption" NavigateUrl="~/UI/Contact.aspx" runat="server">Contact</asp:HyperLink>
-                   <br />
+            <asp:Menu ID="MainMenu" runat="server">
+                <Items>
+                <asp:MenuItem Text="Home" Value="HomeMenuOption" NavigateUrl="~/UI/Home.aspx">
+                </asp:MenuItem>
+                <asp:MenuItem Text="Personal Details" Value="PersonalDetailsOption" NavigateUrl="~/UI/EmployeeDetails.aspx">
+                </asp:MenuItem>
+                <asp:MenuItem Text="Company Details" Value="CompanyDetailsOption" NavigateUrl="~/UI/CompanyDetails.aspx">
+                </asp:MenuItem>
+                <asp:MenuItem Text="Project Details" Value="ProjectDetailsOption" NavigateUrl="~/UI/ProjectDetails.aspx">
+                </asp:MenuItem>
+                <asp:MenuItem Text="Technical Details" Value="TechnicalDetailsOption" NavigateUrl="~/UI/TechnicalDetails.aspx">
+                </asp:MenuItem>
+                <asp:MenuItem Text="Education Details" Value="EducationDetailsOption" NavigateUrl="~/UI/EducationDetails.aspx">
+                </asp:MenuItem>
+                <asp:MenuItem Text="About" Value="AboutOption" NavigateUrl="~/UI/About.aspx">
+                </asp:MenuItem>
+                <asp:MenuItem Text="Contact" Value="ContactOption" NavigateUrl="~/UI/Contact.aspx">
+                </asp:MenuItem>
+              </Items>
+            </asp:Menu>
+            
         </div>
         <div id="Content" class="content">
             <asp:ContentPlaceHolder ID="BodyContentPlaceHolder" runat="server">
         
-                    </asp:ContentPlaceHolder>
+            </asp:ContentPlaceHolder>
         </div>
         </div>
         <div id="Footer" class="footer">

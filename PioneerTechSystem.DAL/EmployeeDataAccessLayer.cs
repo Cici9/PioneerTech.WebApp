@@ -14,8 +14,6 @@ namespace PioneerTechSystem.DAL
     {
         private SqlConnection sqlConnection;
         private SqlCommand sqlCommand;
-        private SqlDataAdapter DataAdapter;
-        private DataTable dataTable;
         public List<Employee> EmployeeData;
         public List<Company> CompanyData;
         public List<Project> ProjectData;
@@ -48,6 +46,45 @@ namespace PioneerTechSystem.DAL
             return returnValue;
         }
 
+        // Insert Employee Details
+        public string SaveEmployeePersonalDetails(Employee EmployeeObj)
+        {
+            try
+            {
+                string returnValue;
+                sqlConnection = OpenConnection();
+                sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandText = "uspSaveEmployeePersonalDetails";
+
+                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = EmployeeObj.EmployeeID;
+                sqlCommand.Parameters.Add("@FirstName", SqlDbType.VarChar).Value = EmployeeObj.FirstName;
+                sqlCommand.Parameters.Add("@LastName", SqlDbType.VarChar).Value = EmployeeObj.LastName;
+                sqlCommand.Parameters.Add("@EmailID", SqlDbType.VarChar).Value = EmployeeObj.EmailID;
+                sqlCommand.Parameters.Add("@MobileNumber", SqlDbType.VarChar).Value = EmployeeObj.MobileNumber;
+                sqlCommand.Parameters.Add("@AlternateMobileNumber", SqlDbType.VarChar).Value = EmployeeObj.AlternateMobileNumber;
+                sqlCommand.Parameters.Add("@AddressLine1", SqlDbType.VarChar).Value = EmployeeObj.AddressLine1;
+                sqlCommand.Parameters.Add("@AddressLine2", SqlDbType.VarChar).Value = EmployeeObj.AddressLine2;
+                sqlCommand.Parameters.Add("@State", SqlDbType.VarChar).Value = EmployeeObj.AddressState;
+                sqlCommand.Parameters.Add("@Country", SqlDbType.VarChar).Value = EmployeeObj.AddressCountry;
+                sqlCommand.Parameters.Add("@ZipCode", SqlDbType.VarChar).Value = EmployeeObj.AddressZipCode;
+                sqlCommand.Parameters.Add("@HomeCountry", SqlDbType.VarChar).Value = EmployeeObj.HomeCountry;
+                
+                returnValue = sqlCommand.ExecuteNonQuery().ToString();
+                return returnValue;
+            }
+            catch (Exception ex)
+            {
+                //return 0;
+                return ex.ToString();
+            }
+            finally
+            {
+                sqlCommand.Dispose();
+                CloseConnection(sqlConnection);
+            }
+        }
         // Insert Consultant Values
         public string InsertConsultantDetails(Employee EmployeeObj, Project ProjectObj, Company CompanyObj, Technical TechnicalObj, Educational EducationalObj)
         {
@@ -108,6 +145,64 @@ namespace PioneerTechSystem.DAL
                 CloseConnection(sqlConnection);
             }
         }
+
+        public List<Employee> GetEmployeeID()
+        {
+            sqlConnection = OpenConnection();
+            EmployeeData = new List<Employee>();
+            sqlCommand = new SqlCommand();
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.CommandText = "uspGetEmployeeIDDetails";
+
+            SqlDataReader EmployeeDetailsReader = sqlCommand.ExecuteReader();
+
+            while (EmployeeDetailsReader.Read())
+            {
+                EmployeeData.Add(new Employee() { EmployeeID = EmployeeDetailsReader.GetInt32(EmployeeDetailsReader.GetOrdinal("EmployeeID")) });
+            }
+            EmployeeDetailsReader.Close();
+            sqlCommand.Dispose();
+            CloseConnection(sqlConnection);
+            //EmployeeData = EmployeeData.Where(data => data != null).ToList();
+            return EmployeeData;
+        }
+
+        public Employee GetPersonalData(string EmployeeID)
+        {
+            sqlConnection = OpenConnection();
+            Employee SelectedEmployee = new Employee();
+            sqlCommand = new SqlCommand();
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.CommandText = "uspGetEmployeePersonalDetails";
+
+            sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(EmployeeID);
+            
+            SqlDataReader EmployeeDetailsReader = sqlCommand.ExecuteReader();
+
+            while (EmployeeDetailsReader.Read())
+            {
+                SelectedEmployee.EmployeeID = EmployeeDetailsReader.GetInt32(EmployeeDetailsReader.GetOrdinal("EmployeeID"));
+                SelectedEmployee.FirstName = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("FirstName"));
+                SelectedEmployee.LastName = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("LastName"));
+                SelectedEmployee.EmailID = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("EmailID"));
+                SelectedEmployee.MobileNumber = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("MobileNumber"));
+                SelectedEmployee.AlternateMobileNumber = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("AlternateMobileNumber"));
+                SelectedEmployee.AddressLine1 = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("AddressLine1"));
+                SelectedEmployee.AddressLine2 = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("AddressLine2"));
+                SelectedEmployee.AddressState = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("AddressState"));
+                SelectedEmployee.AddressCountry = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("AddressCountry"));
+                SelectedEmployee.AddressZipCode = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("AddressState"));
+                SelectedEmployee.HomeCountry = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("HomeCountry"));
+            }
+            EmployeeDetailsReader.Close();
+            sqlCommand.Dispose();
+            CloseConnection(sqlConnection);
+            //EmployeeData = EmployeeData.Where(data => data != null).ToList();
+            return SelectedEmployee;
+        }
+
 
         // To Display values        
         public List<Employee> ViewEmployeeData(string EmployeeID)
