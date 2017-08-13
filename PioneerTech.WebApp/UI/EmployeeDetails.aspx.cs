@@ -30,6 +30,7 @@ namespace PioneerTech.WebApp.UI
 
         protected void PersonalDetailsResetButton_Click(object sender, EventArgs e)
         {
+            EmployeeIDHiddenField.Value = string.Empty;
             FirstNameTextBox.Text = string.Empty;
             LastNameTextBox.Text = string.Empty;
             EmailIDTextBox.Text = string.Empty;
@@ -47,7 +48,7 @@ namespace PioneerTech.WebApp.UI
         {
             string returnValue;
 
-            EmployeeObj.EmployeeID = 0;
+            EmployeeObj.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
             EmployeeObj.FirstName = FirstNameTextBox.Text;
             EmployeeObj.LastName = LastNameTextBox.Text;
             EmployeeObj.EmailID = EmailIDTextBox.Text;
@@ -64,7 +65,7 @@ namespace PioneerTech.WebApp.UI
 
             if(returnValue.Equals("1"))
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Data has been saved successfully'); window.location='" + Request.ApplicationPath + "UI/Home.aspx';", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Data has been saved/updated successfully'); window.location='" + Request.ApplicationPath + "UI/Home.aspx';", true);
             }
             else
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('"+returnValue+"'); window.location='" + Request.ApplicationPath + "UI/Home.aspx';", true);
@@ -75,6 +76,7 @@ namespace PioneerTech.WebApp.UI
             string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;            
             EmployeeObj = EmployeeDALObj.GetPersonalData(SelectedEmployeeID);
 
+            EmployeeIDHiddenField.Value = EmployeeObj.EmployeeID.ToString();
             FirstNameTextBox.Text = EmployeeObj.FirstName;
             LastNameTextBox.Text = EmployeeObj.LastName;
             EmailIDTextBox.Text = EmployeeObj.EmailID;

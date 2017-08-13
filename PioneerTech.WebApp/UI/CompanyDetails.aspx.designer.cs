@@ -13,6 +13,15 @@ namespace PioneerTech.WebApp.UI {
     public partial class CompanyDetails {
         
         /// <summary>
+        /// EmployeeDetailsHyperLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink EmployeeDetailsHyperLink;
+        
+        /// <summary>
         /// EmployeeIDDropDownList control.
         /// </summary>
         /// <remarks>

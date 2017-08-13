@@ -22,6 +22,15 @@ namespace PioneerTech.WebApp.UI {
         protected global::System.Web.UI.WebControls.DropDownList EmployeeIDDropDownList;
         
         /// <summary>
+        /// EmployeeIDHiddenField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField EmployeeIDHiddenField;
+        
+        /// <summary>
         /// FirstNameLabel control.
         /// </summary>
         /// <remarks>

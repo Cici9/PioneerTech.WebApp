@@ -46,7 +46,7 @@ namespace PioneerTechSystem.DAL
             return returnValue;
         }
 
-        // Insert Employee Details
+        // Save Employee Personal Details
         public string SaveEmployeePersonalDetails(Employee EmployeeObj)
         {
             try
@@ -85,6 +85,9 @@ namespace PioneerTechSystem.DAL
                 CloseConnection(sqlConnection);
             }
         }
+
+
+
         // Insert Consultant Values
         public string InsertConsultantDetails(Employee EmployeeObj, Project ProjectObj, Company CompanyObj, Technical TechnicalObj, Educational EducationalObj)
         {
@@ -146,6 +149,7 @@ namespace PioneerTechSystem.DAL
             }
         }
 
+        // Get all the EmployeeID
         public List<Employee> GetEmployeeID()
         {
             sqlConnection = OpenConnection();
@@ -168,6 +172,7 @@ namespace PioneerTechSystem.DAL
             return EmployeeData;
         }
 
+        // Get Personal Details Table Values
         public Employee GetPersonalData(string EmployeeID)
         {
             sqlConnection = OpenConnection();
@@ -199,10 +204,36 @@ namespace PioneerTechSystem.DAL
             EmployeeDetailsReader.Close();
             sqlCommand.Dispose();
             CloseConnection(sqlConnection);
-            //EmployeeData = EmployeeData.Where(data => data != null).ToList();
             return SelectedEmployee;
         }
 
+        // Get Company Details Table Values
+        public Company GetCompanyData(string EmployeeID)
+        {
+            sqlConnection = OpenConnection();
+            Company employeeCompany = new Company();
+            sqlCommand = new SqlCommand();
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.CommandText = "uspGetEmployeeCompanyDetails";
+
+            sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(EmployeeID);
+
+            SqlDataReader CompanyDetailsReader = sqlCommand.ExecuteReader();
+
+            while (CompanyDetailsReader.Read())
+            {
+                employeeCompany.EmployeeID = CompanyDetailsReader.GetInt32(CompanyDetailsReader.GetOrdinal("EmployeeID"));
+                employeeCompany.CompanyName = CompanyDetailsReader.GetString(CompanyDetailsReader.GetOrdinal("CompanyName"));
+                employeeCompany.CompanyContactNumber = CompanyDetailsReader.GetString(CompanyDetailsReader.GetOrdinal("CompanyContactNumber"));
+                employeeCompany.CompanyLocation= CompanyDetailsReader.GetString(CompanyDetailsReader.GetOrdinal("CompanyLocation"));
+                employeeCompany.CompanyWebsite = CompanyDetailsReader.GetString(CompanyDetailsReader.GetOrdinal("CompanyWebsite"));
+            }
+            CompanyDetailsReader.Close();
+            sqlCommand.Dispose();
+            CloseConnection(sqlConnection);
+            return employeeCompany;
+        }
 
         // To Display values        
         public List<Employee> ViewEmployeeData(string EmployeeID)

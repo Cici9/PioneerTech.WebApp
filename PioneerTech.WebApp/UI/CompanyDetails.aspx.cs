@@ -31,15 +31,20 @@ namespace PioneerTech.WebApp.UI
         protected void EmployeeIDDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
-            //CompanyObj = EmployeeDALObj.GetPersonalData(SelectedEmployeeID);
+            CompanyObj = EmployeeDALObj.GetCompanyData(SelectedEmployeeID);
 
-            //CompanyObj
-            
+            CompanyNameTextBox.Text = CompanyObj.CompanyName;
+            CompanyContactNumberTextBox.Text = CompanyObj.CompanyContactNumber;
+            CompanyLocationTextBox.Text = CompanyObj.CompanyLocation;
+            CompanyWebsiteTextBox.Text = CompanyObj.CompanyWebsite;
         }
 
         protected void CompanyDetailsResetButton_Click(object sender, EventArgs e)
         {
-
+            CompanyNameTextBox.Text = string.Empty;
+            CompanyContactNumberTextBox.Text = string.Empty;
+            CompanyLocationTextBox.Text = string.Empty;
+            CompanyWebsiteTextBox.Text = string.Empty;
         }
 
         protected void CompanyDetailsSaveButton_Click(object sender, EventArgs e)
