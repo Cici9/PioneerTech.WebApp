@@ -7,9 +7,70 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PioneerTech.WebApp.UI {
+
+
+public partial class EmployeeInformation {
     
+    /// <summary>
+    /// EmployeeIDDropDownList control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList EmployeeIDDropDownList;
     
-    public partial class EmployeeData {
-    }
+    /// <summary>
+    /// EmployeeIDHiddenField control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField EmployeeIDHiddenField;
+    
+    /// <summary>
+    /// PersonalDetailsGridView control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView PersonalDetailsGridView;
+    
+    /// <summary>
+    /// CompanyDetailsGridView control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView CompanyDetailsGridView;
+    
+    /// <summary>
+    /// ProjectDetailsGridView control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView ProjectDetailsGridView;
+    
+    /// <summary>
+    /// TechnicalDetailsGridView control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView TechnicalDetailsGridView;
+    
+    /// <summary>
+    /// EducationDetailsGridView control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView EducationDetailsGridView;
 }

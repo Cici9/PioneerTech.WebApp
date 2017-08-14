@@ -33,6 +33,8 @@
                 </asp:MenuItem>
                 <asp:MenuItem Text="Education Details" Value="EducationDetailsOption" NavigateUrl="~/UI/EducationDetails.aspx">
                 </asp:MenuItem>
+                <asp:MenuItem Text="View Employee Details" Value="ViewDetailOption" NavigateUrl="~/UI/ViewEmployeeDetails.aspx">
+                </asp:MenuItem>
                 <asp:MenuItem Text="About" Value="AboutOption" NavigateUrl="~/UI/About.aspx">
                 </asp:MenuItem>
                 <asp:MenuItem Text="Contact" Value="ContactOption" NavigateUrl="~/UI/Contact.aspx">
