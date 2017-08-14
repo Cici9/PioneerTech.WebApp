@@ -27,7 +27,6 @@ namespace PioneerTech.WebApp.UI
                 EmployeeIDDropDownList.DataBind();
                 EmployeeIDDropDownList.Items.Insert(0, new ListItem("Select EmployeeID", "0"));
             }
-
         }
 
         protected void EmployeeIDDropDownList_SelectedIndexChanged(object sender, EventArgs e)

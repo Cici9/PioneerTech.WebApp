@@ -120,7 +120,7 @@ namespace PioneerTechSystem.DAL
         }
 
 
-        // Save Employee Company Details
+        // Save Employee Project Details
         public string SaveEmployeeProjectDetails(Project ProjectObj)
         {
             try
@@ -148,9 +148,76 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-
+                sqlCommand.Dispose();
+                CloseConnection(sqlConnection);
             }
         }
+
+        // Save Employee Technical Details
+        public string SaveEmployeeTechnicalDetails(Technical TechnicalObj)
+        {
+            try
+            {
+                string returnVaue;
+                sqlConnection = OpenConnection();
+                sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandText = "uspSaveEmployeeTechnicalDetails";
+
+                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = TechnicalObj.EmployeeID;
+                sqlCommand.Parameters.Add("@ProgrammingLanguages", SqlDbType.VarChar).Value = TechnicalObj.ProgrammingLanguages;
+                sqlCommand.Parameters.Add("@DatabasesKnown", SqlDbType.VarChar).Value = TechnicalObj.DatabasesKnown;
+                sqlCommand.Parameters.Add("@ORMTechnologies", SqlDbType.VarChar).Value = TechnicalObj.ORMTechnologies;
+                sqlCommand.Parameters.Add("@UITechnologies", SqlDbType.VarChar).Value = TechnicalObj.UITechnologies;
+
+                returnVaue = sqlCommand.ExecuteNonQuery().ToString();
+
+                return returnVaue;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            finally
+            {
+                sqlCommand.Dispose();
+                CloseConnection(sqlConnection);
+            }
+        }
+
+        // Save Employee Education Details
+        public string SaveEmployeeEducationDetails(Educational EducationalObj)
+        {
+            try
+            {
+                string returnVaue;
+                sqlConnection = OpenConnection();
+                sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandText = "uspSaveEmployeeEducationalDetails";
+
+                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = EducationalObj.EmployeeID;
+                sqlCommand.Parameters.Add("@CourseType", SqlDbType.VarChar).Value = EducationalObj.CourseType;
+                sqlCommand.Parameters.Add("@CourseSpecialization", SqlDbType.VarChar).Value = EducationalObj.CourseSpecialization;
+                sqlCommand.Parameters.Add("@CourseYearOfPassing", SqlDbType.VarChar).Value = EducationalObj.CourseYearofPassing;
+
+                returnVaue = sqlCommand.ExecuteNonQuery().ToString();
+
+                return returnVaue;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            finally
+            {
+                sqlCommand.Dispose();
+                CloseConnection(sqlConnection);
+            }
+        }
+
         // Insert Consultant Values
         public string InsertConsultantDetails(Employee EmployeeObj, Project ProjectObj, Company CompanyObj, Technical TechnicalObj, Educational EducationalObj)
         {
@@ -326,6 +393,61 @@ namespace PioneerTechSystem.DAL
             sqlCommand.Dispose();
             CloseConnection(sqlConnection);
             return employeeProject;
+        }
+
+        // Get Technical Details Table Values
+        public Technical GetTechnicalData(string EmployeeID)
+        {
+            sqlConnection = OpenConnection();
+            Technical employeeTechnical = new Technical();
+            sqlCommand = new SqlCommand();
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.CommandText = "uspGetEmployeeTechnicalDetails";
+
+            sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(EmployeeID);
+
+            SqlDataReader TechnicalDetailsReader = sqlCommand.ExecuteReader();
+
+            while (TechnicalDetailsReader.Read())
+            {
+                employeeTechnical.EmployeeID = TechnicalDetailsReader.GetInt32(TechnicalDetailsReader.GetOrdinal("EmployeeID"));
+                employeeTechnical.ProgrammingLanguages = TechnicalDetailsReader.GetString(TechnicalDetailsReader.GetOrdinal("ProgrammingLanguages"));
+                employeeTechnical.DatabasesKnown = TechnicalDetailsReader.GetString(TechnicalDetailsReader.GetOrdinal("DatabasesKnown"));
+                employeeTechnical.ORMTechnologies = TechnicalDetailsReader.GetString(TechnicalDetailsReader.GetOrdinal("ORMTechnologies"));
+                employeeTechnical.UITechnologies = TechnicalDetailsReader.GetString(TechnicalDetailsReader.GetOrdinal("UITechnologies"));
+            }
+            TechnicalDetailsReader.Close();
+            sqlCommand.Dispose();
+            CloseConnection(sqlConnection);
+            return employeeTechnical;
+        }
+
+        // Get Education Details Table Values
+        public Educational GetEducationData(string EmployeeID)
+        {
+            sqlConnection = OpenConnection();
+            Educational employeeEducation = new Educational();
+            sqlCommand = new SqlCommand();
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.CommandText = "uspGetEmployeeEducationalDetails";
+
+            sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(EmployeeID);
+
+            SqlDataReader EducationDetailsReader = sqlCommand.ExecuteReader();
+
+            while (EducationDetailsReader.Read())
+            {
+                employeeEducation.EmployeeID = EducationDetailsReader.GetInt32(EducationDetailsReader.GetOrdinal("EmployeeID"));
+                employeeEducation.CourseType = EducationDetailsReader.GetString(EducationDetailsReader.GetOrdinal("CourseType"));
+                employeeEducation.CourseSpecialization = EducationDetailsReader.GetString(EducationDetailsReader.GetOrdinal("CourseSpecialization"));
+                employeeEducation.CourseYearofPassing = EducationDetailsReader.GetString(EducationDetailsReader.GetOrdinal("CourseYearOfPassing"));
+            }
+            EducationDetailsReader.Close();
+            sqlCommand.Dispose();
+            CloseConnection(sqlConnection);
+            return employeeEducation;
         }
 
         // To Display values        
