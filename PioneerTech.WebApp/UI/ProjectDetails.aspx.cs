@@ -31,7 +31,13 @@ namespace PioneerTech.WebApp.UI
 
         protected void EmployeeIDDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;   
+            string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
+            string EmployeeName = EmployeeDataAccessLayerObj.GetEmployeeName(SelectedEmployeeID);
+
+            SelectedEmployeeLabel.Visible = true;
+            SelectedEmployeeName.Text = EmployeeName;
+            SelectedEmployeeName.Visible = true;
+
             ProjectObj = EmployeeDataAccessLayerObj.GetProjectData(SelectedEmployeeID);
 
             EmployeeIDHiddenField.Value = SelectedEmployeeID.ToString();
@@ -52,6 +58,28 @@ namespace PioneerTech.WebApp.UI
 
         protected void ProjectDetailsSaveButton_Click1(object sender, EventArgs e)
         {
+            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (EmployeeID == 0)
+            {
+                Response.Write("<script>alert('Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/ProjectDetails.aspx';</script>");
+            }
+            else
+                SaveData();
+        }
+
+        protected void ProjectDetailsEditButton_Click1(object sender, EventArgs e)
+        {
+            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (EmployeeID == 0)
+            {
+                Response.Write("<script>alert('To Edit: Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/ProjectDetails.aspx';</script>");
+            }
+            else
+                SaveData();
+        }
+
+        protected void SaveData()
+        {
             string returnValue;
 
             ProjectObj.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
@@ -68,11 +96,6 @@ namespace PioneerTech.WebApp.UI
             }
             else
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('" + returnValue + "'); window.location='" + Request.ApplicationPath + "UI/Home.aspx';", true);
-        }
-
-        protected void ProjectDetailsEditButton_Click1(object sender, EventArgs e)
-        {
-
         }
     }
 }

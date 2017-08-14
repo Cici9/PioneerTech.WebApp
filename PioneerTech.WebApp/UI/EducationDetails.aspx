@@ -16,6 +16,15 @@
                 <asp:HiddenField ID="EmployeeIDHiddenField" Value="0" runat="server" />
             </td>
         </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="SelectedEmployeeLabel" runat="server" Text="Selected Employee: " Visible="False"></asp:Label>
+                    <asp:Label ID="SelectedEmployeeName" runat="server" Font-Bold="True" Font-Italic="True" ForeColor="#FF9900" Visible="False"></asp:Label>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
         </table>
     <br /><br />
     <table id ="EducationFormTable">
@@ -48,7 +57,7 @@
                 <asp:Button ID="EducationDetailsResetButton" runat="server" Text="Reset" BackColor="#00CCFF" ForeColor="Black" OnClick="EducationDetailsResetButton_Click" />
             </td>
             <td id="CompanyDetailsEditButtonColumn">
-                <asp:Button ID="EducationDetailsEditButton" runat="server" Text="Edit" BackColor="#00CCFF" />
+                <asp:Button ID="EducationDetailsEditButton" runat="server" Text="Edit" BackColor="#00CCFF" OnClick="EducationDetailsEditButton_Click" />
             </td>
             <td id="CompanyDetailsSaveButtonColumn">
                 <asp:Button ID="EducationDetailsSaveButton" runat="server" Text="Save" BackColor="#00CCFF" OnClick="EducationDetailsSaveButton_Click" />

@@ -31,6 +31,12 @@ namespace PioneerTech.WebApp.UI
         protected void EmployeeIDDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
+            string EmployeeName = EmployeeDataAccessLayerObj.GetEmployeeName(SelectedEmployeeID);
+
+            SelectedEmployeeLabel.Visible = true;
+            SelectedEmployeeName.Text = EmployeeName;
+            SelectedEmployeeName.Visible = true;
+
             EducationalObj = EmployeeDataAccessLayerObj.GetEducationData(SelectedEmployeeID);
 
             EmployeeIDHiddenField.Value = SelectedEmployeeID.ToString();
@@ -48,6 +54,29 @@ namespace PioneerTech.WebApp.UI
         }
 
         protected void EducationDetailsSaveButton_Click(object sender, EventArgs e)
+        {
+            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (EmployeeID == 0)
+            {
+                Response.Write("<script>alert('Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/EducationDetails.aspx';</script>");
+            }
+            else
+                SaveData();
+        }
+
+
+        protected void EducationDetailsEditButton_Click(object sender, EventArgs e)
+        {
+            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (EmployeeID == 0)
+            {
+                Response.Write("<script>alert('To Edit: Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/EducationDetails.aspx';</script>");
+            }
+            else
+                SaveData();
+        }
+
+        protected void SaveData()
         {
             string returnValue;
 

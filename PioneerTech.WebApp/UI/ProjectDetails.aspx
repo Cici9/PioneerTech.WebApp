@@ -16,6 +16,15 @@
                 <asp:HiddenField ID="EmployeeIDHiddenField" Value="0" runat="server" />
             </td>
         </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="SelectedEmployeeLabel" runat="server" Text="Selected Employee: " Visible="False"></asp:Label>
+                    <asp:Label ID="SelectedEmployeeName" runat="server" Font-Bold="True" Font-Italic="True" ForeColor="#FF9900" Visible="False"></asp:Label>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
         </table>
     <br /><br />
     <table id ="ProjectFormTable">

@@ -86,7 +86,6 @@
     <Content Include="Global.asax" />
     <Content Include="UI\Home.aspx" />
     <Content Include="UI\ProjectDetails.aspx" />
-    <Content Include="UI\ProjectInformation.aspx" />
     <Content Include="UI\Services.aspx" />
     <Content Include="UI\TechnicalDetails.aspx" />
     <Content Include="UI\ViewEmployeeDetails.aspx" />
@@ -152,13 +151,6 @@
     </Compile>
     <Compile Include="UI\ProjectDetails.aspx.designer.cs">
       <DependentUpon>ProjectDetails.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ProjectInformation.aspx.cs">
-      <DependentUpon>ProjectInformation.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI\ProjectInformation.aspx.designer.cs">
-      <DependentUpon>ProjectInformation.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Services.aspx.cs">
       <DependentUpon>Services.aspx</DependentUpon>

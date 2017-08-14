@@ -66,6 +66,8 @@ namespace PioneerTech.WebApp.UI
             CountryTextBox.Text = EmployeeObj.AddressCountry;
             ZipCodeTextBox.Text = EmployeeObj.AddressZipCode;
             HomeCountryTextBox.Text = EmployeeObj.HomeCountry;
+
+            PersonalDetailsSaveButton.Visible = false;
         }
 
         protected void PersonalDetailsEditButton_Click(object sender, EventArgs e)
@@ -73,7 +75,7 @@ namespace PioneerTech.WebApp.UI
             int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
             if (EmployeeID == 0)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Select EmployeeID first!!'); window.location='" + Request.ApplicationPath + "UI/EmployeeDetails.aspx';", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('To Edit: Please select an EmployeeID first!!'); window.location='" + Request.ApplicationPath + "UI/EmployeeDetails.aspx';", true);
             }
             else
                 SaveDate();

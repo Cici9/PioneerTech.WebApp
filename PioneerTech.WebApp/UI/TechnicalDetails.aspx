@@ -16,6 +16,15 @@
                 <asp:HiddenField ID="EmployeeIDHiddenField" Value="0" runat="server" />
             </td>
         </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="SelectedEmployeeLabel" runat="server" Text="Selected Employee: " Visible="False"></asp:Label>
+                    <asp:Label ID="SelectedEmployeeName" runat="server" Font-Bold="True" Font-Italic="True" ForeColor="#FF9900" Visible="False"></asp:Label>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
         </table>
     <br /><br />
     <table id ="TechninalFormTable">
@@ -58,7 +67,7 @@
                 <asp:Button ID="TechninalDetailsResetButton" runat="server" Text="Reset" BackColor="#00CCFF" ForeColor="Black" OnClick="TechninalDetailsResetButton_Click" />
             </td>
             <td id="TechninalDetailsEditButtonColumn">
-                <asp:Button ID="TechninalDetailsEditButton" runat="server" Text="Edit" BackColor="#00CCFF" />
+                <asp:Button ID="TechninalDetailsEditButton" runat="server" Text="Edit" BackColor="#00CCFF" OnClick="TechninalDetailsEditButton_Click" />
             </td>
             <td id="TechninalDetailsSaveButtonColumn">
                 <asp:Button ID="TechninalDetailsSaveButton" runat="server" Text="Save" BackColor="#00CCFF" OnClick="TechninalDetailsSaveButton_Click" />

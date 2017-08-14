@@ -31,6 +31,12 @@ namespace PioneerTech.WebApp.UI
         protected void EmployeeIDDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
+            string EmployeeName = EmployeeDALObj.GetEmployeeName(SelectedEmployeeID);
+
+            SelectedEmployeeLabel.Visible = true;
+            SelectedEmployeeName.Text = EmployeeName;
+            SelectedEmployeeName.Visible = true;
+
             CompanyObj = EmployeeDALObj.GetCompanyData(SelectedEmployeeID);
             
 
@@ -52,6 +58,17 @@ namespace PioneerTech.WebApp.UI
 
         protected void CompanyDetailsSaveButton_Click(object sender, EventArgs e)
         {
+            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if(EmployeeID == 0)
+            {
+                Response.Write("<script>alert('Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/CompanyDetails.aspx'; document.getElementById('EmployeeIDDropDownList').focus();</script>");
+            }
+            else
+                SaveData();
+        }
+        
+        protected void SaveData()
+        {
             string returnValue;
 
             CompanyObj.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
@@ -68,6 +85,17 @@ namespace PioneerTech.WebApp.UI
             }
             else
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('" + returnValue + "'); window.location='" + Request.ApplicationPath + "UI/Home.aspx';", true);
+        }
+
+        protected void CompanyDetailsEditButton_Click(object sender, EventArgs e)
+        {
+            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (EmployeeID == 0)
+            {
+                Response.Write("<script>alert('To Edit: Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/CompanyDetails.aspx';</script>");
+            }
+            else
+                SaveData();
         }
     }
 }

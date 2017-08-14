@@ -40,6 +40,24 @@ namespace PioneerTech.WebApp.UI {
         protected global::System.Web.UI.WebControls.HiddenField EmployeeIDHiddenField;
         
         /// <summary>
+        /// SelectedEmployeeLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SelectedEmployeeLabel;
+        
+        /// <summary>
+        /// SelectedEmployeeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SelectedEmployeeName;
+        
+        /// <summary>
         /// ProjectNameLabel control.
         /// </summary>
         /// <remarks>

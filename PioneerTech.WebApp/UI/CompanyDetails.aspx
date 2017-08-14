@@ -16,6 +16,15 @@
                 <asp:HiddenField ID="EmployeeIDHiddenField" Value="0" runat="server" />
             </td>
         </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="SelectedEmployeeLabel" runat="server" Text="Selected Employee: " Visible="False"></asp:Label>
+                    <asp:Label ID="SelectedEmployeeName" runat="server" Font-Bold="True" Font-Italic="True" ForeColor="#FF9900" Visible="False"></asp:Label>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
         </table>
     <br /><br />
     <table id ="EmployeeFormTable">
@@ -26,6 +35,8 @@
             <td id="CompanyNameTextBoxColumn">
                 <asp:textbox runat="server" ID="CompanyNameTextBox"></asp:textbox>
             </td>
+            <td>
+</td>
         </tr>
         <tr id="CompanyContactNumberRow">
             <td id="CompanyContactNumberLabelColumn">
@@ -58,7 +69,7 @@
                 <asp:Button ID="CompanyDetailsResetButton" runat="server" Text="Reset" BackColor="#00CCFF" ForeColor="Black" OnClick="CompanyDetailsResetButton_Click" />
             </td>
             <td id="CompanyDetailsEditButtonColumn">
-                <asp:Button ID="CompanyDetailsEditButton" runat="server" Text="Edit" BackColor="#00CCFF" />
+                <asp:Button ID="CompanyDetailsEditButton" runat="server" Text="Edit" BackColor="#00CCFF" OnClick="CompanyDetailsEditButton_Click" />
             </td>
             <td id="CompanyDetailsSaveButtonColumn">
                 <asp:Button ID="CompanyDetailsSaveButton" runat="server" Text="Save" BackColor="#00CCFF" OnClick="CompanyDetailsSaveButton_Click" />

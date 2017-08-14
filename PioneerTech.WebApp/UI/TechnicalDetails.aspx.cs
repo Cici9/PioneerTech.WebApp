@@ -31,6 +31,12 @@ namespace PioneerTech.WebApp.UI
         protected void EmployeeIDDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
+            string EmployeeName = EmployeeDALObj.GetEmployeeName(SelectedEmployeeID);
+
+            SelectedEmployeeLabel.Visible = true;
+            SelectedEmployeeName.Text = EmployeeName;
+            SelectedEmployeeName.Visible = true;
+
             TechnicalObj = EmployeeDALObj.GetTechnicalData(SelectedEmployeeID);
 
 
@@ -42,6 +48,37 @@ namespace PioneerTech.WebApp.UI
         }
 
         protected void TechninalDetailsSaveButton_Click(object sender, EventArgs e)
+        {
+            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (EmployeeID == 0)
+            {
+                Response.Write("<script>alert('Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/TechnicalDetails.aspx';</script>");
+            }
+            else
+                SaveData();
+        }
+
+        protected void TechninalDetailsResetButton_Click(object sender, EventArgs e)
+        {
+            EmployeeIDHiddenField.Value = string.Empty;
+            ProgrammingLanguagesTextBox.Text = string.Empty;
+            DatabasesKnownTextBox.Text = string.Empty;
+            ORMTechnologiesTextBox.Text = string.Empty;
+            UITechnologiesTextBox.Text = string.Empty;
+        }
+
+        protected void TechninalDetailsEditButton_Click(object sender, EventArgs e)
+        {
+            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (EmployeeID == 0)
+            {
+                Response.Write("<script>alert('To Edit: Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/TechnicalDetails.aspx';</script>");
+            }
+            else
+                SaveData();
+        }
+
+        protected void SaveData()
         {
             string returnValue;
 
@@ -59,15 +96,6 @@ namespace PioneerTech.WebApp.UI
             }
             else
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('" + returnValue + "'); window.location='" + Request.ApplicationPath + "UI/Home.aspx';", true);
-        }
-
-        protected void TechninalDetailsResetButton_Click(object sender, EventArgs e)
-        {
-            EmployeeIDHiddenField.Value = string.Empty;
-            ProgrammingLanguagesTextBox.Text = string.Empty;
-            DatabasesKnownTextBox.Text = string.Empty;
-            ORMTechnologiesTextBox.Text = string.Empty;
-            UITechnologiesTextBox.Text = string.Empty;
         }
     }
 }

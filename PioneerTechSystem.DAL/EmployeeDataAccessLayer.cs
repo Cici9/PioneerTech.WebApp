@@ -218,63 +218,36 @@ namespace PioneerTechSystem.DAL
             }
         }
 
-        // Insert Consultant Values
-        public string InsertConsultantDetails(Employee EmployeeObj, Project ProjectObj, Company CompanyObj, Technical TechnicalObj, Educational EducationalObj)
+        // Get particular Employee Name
+        public string GetEmployeeName(string EmployeeID)
         {
-            
             try
             {
+                string EmployeeName = null;
                 sqlConnection = OpenConnection();
                 sqlCommand = new SqlCommand();
                 sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.CommandText = "uspInsertDetails";
+                sqlCommand.CommandText = "uspGetEmployeeName";
 
-                sqlCommand.Parameters.Add("@FirstName", SqlDbType.VarChar).Value = EmployeeObj.FirstName;
-                sqlCommand.Parameters.Add("@LastName", SqlDbType.VarChar).Value = EmployeeObj.LastName;
-                sqlCommand.Parameters.Add("@EmailID", SqlDbType.VarChar).Value = EmployeeObj.EmailID;
-                sqlCommand.Parameters.Add("@MobileNumber", SqlDbType.VarChar).Value = EmployeeObj.MobileNumber;
-                sqlCommand.Parameters.Add("@AlternateMobileNumber", SqlDbType.VarChar).Value = EmployeeObj.AlternateMobileNumber;
-                sqlCommand.Parameters.Add("@AddressLine1", SqlDbType.VarChar).Value = EmployeeObj.AddressLine1;
-                sqlCommand.Parameters.Add("@AddressLine2", SqlDbType.VarChar).Value = EmployeeObj.AddressLine2;
-                sqlCommand.Parameters.Add("@State", SqlDbType.VarChar).Value = EmployeeObj.AddressState;
-                sqlCommand.Parameters.Add("@Country", SqlDbType.VarChar).Value = EmployeeObj.AddressCountry;
-                sqlCommand.Parameters.Add("@ZipCode", SqlDbType.VarChar).Value = EmployeeObj.AddressZipCode;
-                sqlCommand.Parameters.Add("@HomeCountry", SqlDbType.VarChar).Value = EmployeeObj.HomeCountry;
-                sqlCommand.Parameters.Add("@ProjectName", SqlDbType.VarChar).Value = ProjectObj.ProjectName;
-                sqlCommand.Parameters.Add("@ClientName", SqlDbType.VarChar).Value = ProjectObj.ClientName;
-                sqlCommand.Parameters.Add("@ProjectLocation", SqlDbType.VarChar).Value = ProjectObj.ProjectLocation;
-                sqlCommand.Parameters.Add("@ProjectRoles", SqlDbType.VarChar).Value = ProjectObj.ProjectRoles;
-                sqlCommand.Parameters.Add("@CompanyName", SqlDbType.VarChar).Value = CompanyObj.CompanyName;
-                sqlCommand.Parameters.Add("@CompanyContactNumber", SqlDbType.VarChar).Value = CompanyObj.CompanyContactNumber;
-                sqlCommand.Parameters.Add("@CompanyLocation", SqlDbType.VarChar).Value = CompanyObj.CompanyLocation;
-                sqlCommand.Parameters.Add("@CompanyWebsite", SqlDbType.VarChar).Value = CompanyObj.CompanyWebsite;
-                sqlCommand.Parameters.Add("@ProgrammingLanguages", SqlDbType.VarChar).Value = TechnicalObj.ProgrammingLanguages;
-                sqlCommand.Parameters.Add("@Databases", SqlDbType.VarChar).Value = TechnicalObj.DatabasesKnown;
-                sqlCommand.Parameters.Add("@ORMTechnologies", SqlDbType.VarChar).Value = TechnicalObj.ORMTechnologies;
-                sqlCommand.Parameters.Add("@UITechnologies", SqlDbType.VarChar).Value = TechnicalObj.UITechnologies;
-                sqlCommand.Parameters.Add("@CourseType", SqlDbType.VarChar).Value = EducationalObj.CourseType;
-                sqlCommand.Parameters.Add("@CourseSpecialization", SqlDbType.VarChar).Value = EducationalObj.CourseSpecialization;
-                sqlCommand.Parameters.Add("@CourseYear", SqlDbType.VarChar).Value = EducationalObj.CourseYearofPassing;
+                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = EmployeeID;
 
-                SqlParameter returnMessage = sqlCommand.CreateParameter();
-                returnMessage.ParameterName = "Message";
-                returnMessage.Direction = ParameterDirection.Output;
-                returnMessage.DbType = DbType.String;
-                returnMessage.Size = 100;
-                sqlCommand.Parameters.Add(returnMessage);
+                SqlDataReader GetNameReader = sqlCommand.ExecuteReader();
 
-                sqlCommand.ExecuteNonQuery();
-                string returnValue = returnMessage.Value.ToString();
-                sqlCommand.Dispose();
-                return returnValue;
+                while (GetNameReader.Read())
+                {
+                    EmployeeName = GetNameReader.GetString(GetNameReader.GetOrdinal("LastName")) + ", " + GetNameReader.GetString(GetNameReader.GetOrdinal("FirstName"));
+                }
+
+                return EmployeeName;
             }
             catch (Exception ex)
             {
-                return ex.ToString();
+                return ex.Message;
             }
             finally
             {
+                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
