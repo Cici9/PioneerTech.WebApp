@@ -32,7 +32,9 @@ namespace PioneerTech.WebApp.UI
         {
             string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
             CompanyObj = EmployeeDALObj.GetCompanyData(SelectedEmployeeID);
+            
 
+            EmployeeIDHiddenField.Value = SelectedEmployeeID.ToString();
             CompanyNameTextBox.Text = CompanyObj.CompanyName;
             CompanyContactNumberTextBox.Text = CompanyObj.CompanyContactNumber;
             CompanyLocationTextBox.Text = CompanyObj.CompanyLocation;
@@ -41,6 +43,7 @@ namespace PioneerTech.WebApp.UI
 
         protected void CompanyDetailsResetButton_Click(object sender, EventArgs e)
         {
+            EmployeeIDHiddenField.Value = string.Empty;
             CompanyNameTextBox.Text = string.Empty;
             CompanyContactNumberTextBox.Text = string.Empty;
             CompanyLocationTextBox.Text = string.Empty;
@@ -49,7 +52,22 @@ namespace PioneerTech.WebApp.UI
 
         protected void CompanyDetailsSaveButton_Click(object sender, EventArgs e)
         {
+            string returnValue;
 
+            CompanyObj.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            CompanyObj.CompanyName = CompanyNameTextBox.Text;
+            CompanyObj.CompanyContactNumber = CompanyContactNumberTextBox.Text;
+            CompanyObj.CompanyLocation = CompanyLocationTextBox.Text;
+            CompanyObj.CompanyWebsite = CompanyWebsiteTextBox.Text;
+
+            returnValue = EmployeeDALObj.SaveEmployeeCompanyDetails(CompanyObj);
+
+            if (returnValue.Equals("1"))
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Company Data has been saved/updated successfully'); window.location='" + Request.ApplicationPath + "UI/Home.aspx';", true);
+            }
+            else
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('" + returnValue + "'); window.location='" + Request.ApplicationPath + "UI/Home.aspx';", true);
         }
     }
 }

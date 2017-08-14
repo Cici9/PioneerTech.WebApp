@@ -86,8 +86,71 @@ namespace PioneerTechSystem.DAL
             }
         }
 
+        // Save Employee Company Details
+        public string SaveEmployeeCompanyDetails(Company CompanyObj)
+        {
+            try
+            {
+                string returnValue;
+                sqlConnection = OpenConnection();
+                sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandText = "uspSaveEmployeeCompanyDetails";
+
+                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = CompanyObj.EmployeeID;
+                sqlCommand.Parameters.Add("@CompanyName", SqlDbType.VarChar).Value = CompanyObj.CompanyName;
+                sqlCommand.Parameters.Add("@CompanyContactNumber", SqlDbType.VarChar).Value = CompanyObj.CompanyContactNumber;
+                sqlCommand.Parameters.Add("@CompanyLocation", SqlDbType.VarChar).Value = CompanyObj.CompanyLocation;
+                sqlCommand.Parameters.Add("@CompanyWebsite", SqlDbType.VarChar).Value = CompanyObj.CompanyWebsite;
+
+                returnValue = sqlCommand.ExecuteNonQuery().ToString();
+                return returnValue;
+            }
+            catch (Exception ex)
+            {
+                //return 0;
+                return ex.ToString();
+            }
+            finally
+            {
+                sqlCommand.Dispose();
+                CloseConnection(sqlConnection);
+            }
+        }
 
 
+        // Save Employee Company Details
+        public string SaveEmployeeProjectDetails(Project ProjectObj)
+        {
+            try
+            {
+                string returnVaue;
+                sqlConnection = OpenConnection();
+                sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandText = "uspSaveEmployeeProjectDetails";
+
+                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = ProjectObj.EmployeeID;
+                sqlCommand.Parameters.Add("@ProjectName", SqlDbType.VarChar).Value = ProjectObj.ProjectName;
+                sqlCommand.Parameters.Add("@ClientName", SqlDbType.VarChar).Value = ProjectObj.ClientName;
+                sqlCommand.Parameters.Add("@ProjectLocation", SqlDbType.VarChar).Value = ProjectObj.ProjectLocation;
+                sqlCommand.Parameters.Add("@ProjectRoles", SqlDbType.VarChar).Value = ProjectObj.ProjectRoles;
+
+                returnVaue = sqlCommand.ExecuteNonQuery().ToString();
+
+                return returnVaue;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            finally
+            {
+
+            }
+        }
         // Insert Consultant Values
         public string InsertConsultantDetails(Employee EmployeeObj, Project ProjectObj, Company CompanyObj, Technical TechnicalObj, Educational EducationalObj)
         {
@@ -163,6 +226,7 @@ namespace PioneerTechSystem.DAL
 
             while (EmployeeDetailsReader.Read())
             {
+                int id = EmployeeDetailsReader.GetInt32(EmployeeDetailsReader.GetOrdinal("EmployeeID"));
                 EmployeeData.Add(new Employee() { EmployeeID = EmployeeDetailsReader.GetInt32(EmployeeDetailsReader.GetOrdinal("EmployeeID")) });
             }
             EmployeeDetailsReader.Close();
@@ -233,6 +297,35 @@ namespace PioneerTechSystem.DAL
             sqlCommand.Dispose();
             CloseConnection(sqlConnection);
             return employeeCompany;
+        }
+
+        // Get Company Details Table Values
+        public Project GetProjectData(string EmployeeID)
+        {
+            sqlConnection = OpenConnection();
+            Project employeeProject = new Project();
+            sqlCommand = new SqlCommand();
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.CommandText = "uspGetEmployeeProjectDetails";
+
+            sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(EmployeeID);
+
+            SqlDataReader ProjectDetailsReader = sqlCommand.ExecuteReader();
+
+            while (ProjectDetailsReader.Read())
+            {
+                employeeProject.ProjectID = ProjectDetailsReader.GetInt32(ProjectDetailsReader.GetOrdinal("ProjectID"));
+                employeeProject.ProjectName = ProjectDetailsReader.GetString(ProjectDetailsReader.GetOrdinal("ProjectName"));
+                employeeProject.ClientName = ProjectDetailsReader.GetString(ProjectDetailsReader.GetOrdinal("ClientName"));
+                employeeProject.ProjectLocation = ProjectDetailsReader.GetString(ProjectDetailsReader.GetOrdinal("ProjectLocation"));
+                employeeProject.ProjectRoles = ProjectDetailsReader.GetString(ProjectDetailsReader.GetOrdinal("ProjectRoles"));
+                employeeProject.EmployeeID = ProjectDetailsReader.GetInt32(ProjectDetailsReader.GetOrdinal("EmployeeID"));
+            }
+            ProjectDetailsReader.Close();
+            sqlCommand.Dispose();
+            CloseConnection(sqlConnection);
+            return employeeProject;
         }
 
         // To Display values        
