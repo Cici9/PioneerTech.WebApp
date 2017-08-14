@@ -72,7 +72,6 @@
     <Content Include="UI\Contact.aspx" />
     <Content Include="UI\EducationDetails.aspx" />
     <Content Include="UI\EmployeeDetails.aspx" />
-    <Content Include="UI\EmployeeInformation.aspx" />
     <Content Include="UI\PioneerTechMasterPage.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -132,13 +131,6 @@
     </Compile>
     <Compile Include="UI\EmployeeDetails.aspx.designer.cs">
       <DependentUpon>EmployeeDetails.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI\EmployeeInformation.aspx.cs">
-      <DependentUpon>EmployeeInformation.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI\EmployeeInformation.aspx.designer.cs">
-      <DependentUpon>EmployeeInformation.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>

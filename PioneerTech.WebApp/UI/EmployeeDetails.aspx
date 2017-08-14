@@ -25,6 +25,9 @@
             <td id="FirstNameTextBoxColumn">
                 <asp:textbox runat="server" ID="FirstNameTextBox"></asp:textbox>
             </td>
+            <td>
+                <asp:RequiredFieldValidator ID="FirstNameValidator" runat="server" ErrorMessage="First Name is Mandatory!!" ControlToValidate="FirstNameTextBox" ForeColor="#FF3300" Font-Italic="True"></asp:RequiredFieldValidator>
+            </td>
         </tr>
         <tr id="LastNameRow">
             <td id="LastNameLabelColumn">
@@ -32,6 +35,11 @@
             </td>
             <td id="LastNameTextBoxColumn">
                 <asp:textbox runat="server" ID="LastNameTextBox"></asp:textbox>
+            </td>
+            <td>
+
+                <asp:RequiredFieldValidator ID="LastNameValidator" runat="server" ControlToValidate="LastNameTextBox" ErrorMessage="Last Name is Mandatory!!" Font-Italic="True" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+
             </td>
         </tr>
         <tr id="EmailIDRow">
@@ -41,7 +49,11 @@
             <td id="EmailIDTextBoxColumn">
                 <asp:textbox runat="server" ID="EmailIDTextBox"></asp:textbox>
             </td>
-            
+            <td>
+
+                <asp:RequiredFieldValidator ID="EmailIDValidator" runat="server" ControlToValidate="EmailIDTextBox" ErrorMessage="EmailID is Mandatory!!" Font-Italic="True" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+
+            </td>
         </tr>
         <tr id="MobileNumberRow">
             <td id="MobileNumberLabelColumn">
@@ -49,6 +61,11 @@
             </td>
             <td id="MobileNumberTextBoxColumn">
                 <asp:textbox runat="server" ID="MobileNumberTextBox"></asp:textbox>
+            </td>
+            <td>
+
+                <asp:RequiredFieldValidator ID="MobileNumberValidator0" runat="server" ControlToValidate="MobileNumberTextBox" ErrorMessage="Mobile Number is Mandatory!!" Font-Italic="True" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+
             </td>
         </tr>
         <tr id="AlternateMobileNumberRow">
@@ -74,6 +91,11 @@
                 <asp:TextBox runat="server" ID="AddressLine1TextBox"></asp:TextBox>
 
             </td>
+            <td>
+
+                <asp:RequiredFieldValidator ID="AddressLine1Validator" runat="server" ControlToValidate="AddressLine1TextBox" ErrorMessage="Address Line 1 is Mandatory!!" Font-Italic="True" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+
+            </td>
         </tr>
         <tr id="AddressLine2Row">
             <td id="AddressLine2LabelColumn">
@@ -94,13 +116,22 @@
             <td id="AddressStateTextBoxColumn">
                 <asp:TextBox runat="server" ID="StateTextBox"></asp:TextBox>
             </td>
+            <td>
+
+                <asp:RequiredFieldValidator ID="StateValidator" runat="server" ControlToValidate="StateTextBox" ErrorMessage="State is Mandatory!!" Font-Italic="True" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+
+            </td>
         </tr>
         <tr id="AddressCountryRow">
             <td id="AddressCountryLabelColumn">
                 <asp:Label ID="CountryLabel" runat="server" Text="Country"></asp:Label>
             </td>
             <td id="AddressCountryTextBoxColumn">
-                <asp:TextBox runat="server" ID="CountryTextBox"></asp:TextBox>               
+                <asp:TextBox runat="server" ID="CountryTextBox"></asp:TextBox>            
+            </td>
+            <td>
+
+                <asp:RequiredFieldValidator ID="CountryValidator" runat="server" ControlToValidate="CountryTextBox" ErrorMessage="Country is Mandatory!!" Font-Italic="True" ForeColor="#FF3300"></asp:RequiredFieldValidator>
 
             </td>
         </tr>
@@ -111,6 +142,11 @@
             </td>
             <td id="AddressZipCodeTextBoxColumn">
                 <asp:TextBox runat="server" ID="ZipCodeTextBox"></asp:TextBox>
+            </td>
+            <td>
+
+                <asp:RequiredFieldValidator ID="ZipCodeValidator" runat="server" ControlToValidate="ZipCodeTextBox" ErrorMessage="ZipCode is Mandatory!!" Font-Italic="True" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+
             </td>
         </tr>
         <tr id="HomeCountryRow">
@@ -129,7 +165,7 @@
                 <asp:Button ID="PersonalDetailsResetButton" runat="server" Text="Reset" BackColor="#00CCFF" ForeColor="Black" OnClick="PersonalDetailsResetButton_Click" />
             </td>
             <td id="PersonalDetailsEditButtonColumn">
-                <asp:Button ID="PersonalDetailsEditButton" runat="server" Text="Edit" BackColor="#00CCFF" />
+                <asp:Button ID="PersonalDetailsEditButton" runat="server" Text="Edit" BackColor="#00CCFF" OnClick="PersonalDetailsEditButton_Click" />
             </td>
             <td id="PersonalDetailsSaveButtonColumn">
                 <asp:Button ID="PersonalDetailsSaveButton" runat="server" Text="Save" BackColor="#00CCFF" OnClick="PersonalDetailsSaveButton_Click" />

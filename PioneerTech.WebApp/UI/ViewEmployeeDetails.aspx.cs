@@ -11,13 +11,13 @@ namespace PioneerTech.WebApp.UI
 {
     public partial class ViewEmployeeDetails : System.Web.UI.Page
     {
-        private string EmployeeID;
+        //private string EmployeeID;
         private EmployeeDataAccessLayer EmployeeDALObj;
-        private List<Employee> EmployeeData;
-        private List<Company> CompanyData;
-        private List<Project> ProjectData;
-        private List<Technical> TechnicalData;
-        private List<Educational> EducationData;
+        //private List<Employee> EmployeeData;
+        //private List<Company> CompanyData;
+        //private List<Project> ProjectData;
+        //private List<Technical> TechnicalData;
+        //private List<Educational> EducationData;
         protected void Page_Load(object sender, EventArgs e)
         {
             EmployeeDALObj = new EmployeeDataAccessLayer();

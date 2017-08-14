@@ -49,6 +49,15 @@ namespace PioneerTech.WebApp.UI {
         protected global::System.Web.UI.WebControls.TextBox FirstNameTextBox;
         
         /// <summary>
+        /// FirstNameValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator FirstNameValidator;
+        
+        /// <summary>
         /// LastNameLabel control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace PioneerTech.WebApp.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox LastNameTextBox;
+        
+        /// <summary>
+        /// LastNameValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator LastNameValidator;
         
         /// <summary>
         /// EmailIDLabel control.
@@ -85,6 +103,15 @@ namespace PioneerTech.WebApp.UI {
         protected global::System.Web.UI.WebControls.TextBox EmailIDTextBox;
         
         /// <summary>
+        /// EmailIDValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator EmailIDValidator;
+        
+        /// <summary>
         /// MobileNumberLabel control.
         /// </summary>
         /// <remarks>
@@ -101,6 +128,15 @@ namespace PioneerTech.WebApp.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox MobileNumberTextBox;
+        
+        /// <summary>
+        /// MobileNumberValidator0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator MobileNumberValidator0;
         
         /// <summary>
         /// AlternateMobileNumberLabel control.
@@ -139,6 +175,15 @@ namespace PioneerTech.WebApp.UI {
         protected global::System.Web.UI.WebControls.TextBox AddressLine1TextBox;
         
         /// <summary>
+        /// AddressLine1Validator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator AddressLine1Validator;
+        
+        /// <summary>
         /// AddressLine2Label control.
         /// </summary>
         /// <remarks>
@@ -175,6 +220,15 @@ namespace PioneerTech.WebApp.UI {
         protected global::System.Web.UI.WebControls.TextBox StateTextBox;
         
         /// <summary>
+        /// StateValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator StateValidator;
+        
+        /// <summary>
         /// CountryLabel control.
         /// </summary>
         /// <remarks>
@@ -193,6 +247,15 @@ namespace PioneerTech.WebApp.UI {
         protected global::System.Web.UI.WebControls.TextBox CountryTextBox;
         
         /// <summary>
+        /// CountryValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator CountryValidator;
+        
+        /// <summary>
         /// ZipCodeLabel control.
         /// </summary>
         /// <remarks>
@@ -209,6 +272,15 @@ namespace PioneerTech.WebApp.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ZipCodeTextBox;
+        
+        /// <summary>
+        /// ZipCodeValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ZipCodeValidator;
         
         /// <summary>
         /// HomeCountryLabel control.

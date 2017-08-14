@@ -46,29 +46,7 @@ namespace PioneerTech.WebApp.UI
 
         protected void PersonalDetailsSaveButton_Click(object sender, EventArgs e)
         {
-            string returnValue;
-
-            EmployeeObj.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            EmployeeObj.FirstName = FirstNameTextBox.Text;
-            EmployeeObj.LastName = LastNameTextBox.Text;
-            EmployeeObj.EmailID = EmailIDTextBox.Text;
-            EmployeeObj.MobileNumber = MobileNumberTextBox.Text;
-            EmployeeObj.AlternateMobileNumber = AlternateMobileNumberTextBox.Text;
-            EmployeeObj.AddressLine1 = AddressLine1TextBox.Text;
-            EmployeeObj.AddressLine2 = AddressLine2TextBox.Text;
-            EmployeeObj.AddressState = StateTextBox.Text;
-            EmployeeObj.AddressCountry = CountryTextBox.Text;
-            EmployeeObj.AddressZipCode = ZipCodeTextBox.Text;
-            EmployeeObj.HomeCountry = HomeCountryTextBox.Text;
-
-            returnValue = EmployeeDALObj.SaveEmployeePersonalDetails(EmployeeObj);
-
-            if(returnValue.Equals("1"))
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Data has been saved/updated successfully'); window.location='" + Request.ApplicationPath + "UI/Home.aspx';", true);
-            }
-            else
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('"+returnValue+"'); window.location='" + Request.ApplicationPath + "UI/Home.aspx';", true);
+            SaveDate();
         }
 
         protected void EmployeeIDDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -88,6 +66,42 @@ namespace PioneerTech.WebApp.UI
             CountryTextBox.Text = EmployeeObj.AddressCountry;
             ZipCodeTextBox.Text = EmployeeObj.AddressZipCode;
             HomeCountryTextBox.Text = EmployeeObj.HomeCountry;
+        }
+
+        protected void PersonalDetailsEditButton_Click(object sender, EventArgs e)
+        {
+            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (EmployeeID == 0)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Select EmployeeID first!!'); window.location='" + Request.ApplicationPath + "UI/EmployeeDetails.aspx';", true);
+            }
+            else
+                SaveDate();
+        }
+
+        protected void SaveDate()
+        {
+            string returnValue;
+            EmployeeObj.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            EmployeeObj.FirstName = FirstNameTextBox.Text;
+            EmployeeObj.LastName = LastNameTextBox.Text;
+            EmployeeObj.EmailID = EmailIDTextBox.Text;
+            EmployeeObj.MobileNumber = MobileNumberTextBox.Text;
+            EmployeeObj.AlternateMobileNumber = AlternateMobileNumberTextBox.Text;
+            EmployeeObj.AddressLine1 = AddressLine1TextBox.Text;
+            EmployeeObj.AddressLine2 = AddressLine2TextBox.Text;
+            EmployeeObj.AddressState = StateTextBox.Text;
+            EmployeeObj.AddressCountry = CountryTextBox.Text;
+            EmployeeObj.AddressZipCode = ZipCodeTextBox.Text;
+            EmployeeObj.HomeCountry = HomeCountryTextBox.Text;
+            returnValue = EmployeeDALObj.SaveEmployeePersonalDetails(EmployeeObj);
+
+            if (returnValue.Equals("1"))
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Data has been saved/updated successfully'); window.location='" + Request.ApplicationPath + "UI/Home.aspx';", true);
+            }
+            else
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('" + returnValue + "'); window.location='" + Request.ApplicationPath + "UI/Home.aspx';", true);
         }
     }
 }
