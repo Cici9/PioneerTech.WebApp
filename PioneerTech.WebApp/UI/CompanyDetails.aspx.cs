@@ -37,8 +37,7 @@ namespace PioneerTech.WebApp.UI
             SelectedEmployeeName.Text = EmployeeName;
             SelectedEmployeeName.Visible = true;
 
-            CompanyObj = EmployeeDALObj.GetCompanyData(SelectedEmployeeID);
-            
+            CompanyObj = EmployeeDALObj.GetCompanyData(SelectedEmployeeID);            
 
             EmployeeIDHiddenField.Value = SelectedEmployeeID.ToString();
             CompanyNameTextBox.Text = CompanyObj.CompanyName;
