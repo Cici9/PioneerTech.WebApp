@@ -11,17 +11,17 @@ namespace PioneerTech.WebApp.UI
 {
     public partial class TechnicalDetails : System.Web.UI.Page
     {
-        private Technical TechnicalObj;
-        private EmployeeDataAccessLayer EmployeeDALObj;
+        private Technical technicalObj;
+        private EmployeeDataAccessLayer employeeDataAccessLayerObject;
         protected void Page_Load(object sender, EventArgs e)
         {
-            TechnicalObj = new Technical();
-            EmployeeDALObj = new EmployeeDataAccessLayer();
+            technicalObj = new Technical();
+            employeeDataAccessLayerObject = new EmployeeDataAccessLayer();
             if (!IsPostBack)
             {
                 EmployeeIDDropDownList.DataTextField = "EmployeeID";
                 EmployeeIDDropDownList.DataValueField = "EmployeeID";
-                EmployeeIDDropDownList.DataSource = EmployeeDALObj.GetEmployeeID();
+                EmployeeIDDropDownList.DataSource = employeeDataAccessLayerObject.GetEmployeeID();
                 EmployeeIDDropDownList.DataBind();
                 EmployeeIDDropDownList.Items.Insert(0, new ListItem("Select EmployeeID", "0"));
             }
@@ -30,27 +30,27 @@ namespace PioneerTech.WebApp.UI
 
         protected void EmployeeIDDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
-            string EmployeeName = EmployeeDALObj.GetEmployeeName(SelectedEmployeeID);
+            string selectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
+            string employeeName = employeeDataAccessLayerObject.GetEmployeeName(selectedEmployeeID);
 
             SelectedEmployeeLabel.Visible = true;
-            SelectedEmployeeName.Text = EmployeeName;
+            SelectedEmployeeName.Text = employeeName;
             SelectedEmployeeName.Visible = true;
 
-            TechnicalObj = EmployeeDALObj.GetTechnicalData(SelectedEmployeeID);
+            technicalObj = employeeDataAccessLayerObject.GetTechnicalData(selectedEmployeeID);
 
 
-            EmployeeIDHiddenField.Value = SelectedEmployeeID.ToString();
-            ProgrammingLanguagesTextBox.Text = TechnicalObj.ProgrammingLanguages;
-            DatabasesKnownTextBox.Text = TechnicalObj.DatabasesKnown;
-            ORMTechnologiesTextBox.Text = TechnicalObj.ORMTechnologies;
-            UITechnologiesTextBox.Text = TechnicalObj.UITechnologies;
+            EmployeeIDHiddenField.Value = selectedEmployeeID.ToString();
+            ProgrammingLanguagesTextBox.Text = technicalObj.ProgrammingLanguages;
+            DatabasesKnownTextBox.Text = technicalObj.DatabasesKnown;
+            ORMTechnologiesTextBox.Text = technicalObj.ORMTechnologies;
+            UITechnologiesTextBox.Text = technicalObj.UITechnologies;
         }
 
         protected void TechninalDetailsSaveButton_Click(object sender, EventArgs e)
         {
-            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            if (EmployeeID == 0)
+            int employeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (employeeID == 0)
             {
                 Response.Write("<script>alert('Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/TechnicalDetails.aspx';</script>");
             }
@@ -69,8 +69,8 @@ namespace PioneerTech.WebApp.UI
 
         protected void TechninalDetailsEditButton_Click(object sender, EventArgs e)
         {
-            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            if (EmployeeID == 0)
+            int employeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (employeeID == 0)
             {
                 Response.Write("<script>alert('To Edit: Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/TechnicalDetails.aspx';</script>");
             }
@@ -82,13 +82,13 @@ namespace PioneerTech.WebApp.UI
         {
             string returnValue;
 
-            TechnicalObj.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            TechnicalObj.ProgrammingLanguages = ProgrammingLanguagesTextBox.Text;
-            TechnicalObj.DatabasesKnown = DatabasesKnownTextBox.Text;
-            TechnicalObj.ORMTechnologies = ORMTechnologiesTextBox.Text;
-            TechnicalObj.UITechnologies = UITechnologiesTextBox.Text;
+            technicalObj.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            technicalObj.ProgrammingLanguages = ProgrammingLanguagesTextBox.Text;
+            technicalObj.DatabasesKnown = DatabasesKnownTextBox.Text;
+            technicalObj.ORMTechnologies = ORMTechnologiesTextBox.Text;
+            technicalObj.UITechnologies = UITechnologiesTextBox.Text;
 
-            returnValue = EmployeeDALObj.SaveEmployeeTechnicalDetails(TechnicalObj);
+            returnValue = employeeDataAccessLayerObject.SaveEmployeeTechnicalDetails(technicalObj);
 
             if (returnValue.Equals("1"))
             {

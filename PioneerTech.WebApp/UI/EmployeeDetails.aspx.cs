@@ -11,18 +11,18 @@ namespace PioneerTech.WebApp.UI
 {
     public partial class EmployeeDetails : System.Web.UI.Page
     {
-        private Employee EmployeeObj;
-        private EmployeeDataAccessLayer EmployeeDALObj;
+        private Employee employeeObj;
+        private EmployeeDataAccessLayer employeeDataAccessLayerObject;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            EmployeeObj = new Employee();
-            EmployeeDALObj = new EmployeeDataAccessLayer();
+            employeeObj = new Employee();
+            employeeDataAccessLayerObject = new EmployeeDataAccessLayer();
             if (!IsPostBack)
             {
                 EmployeeIDDropDownList.DataTextField = "EmployeeID";
                 EmployeeIDDropDownList.DataValueField = "EmployeeID";
-                EmployeeIDDropDownList.DataSource = EmployeeDALObj.GetEmployeeID();
+                EmployeeIDDropDownList.DataSource = employeeDataAccessLayerObject.GetEmployeeID();
                 EmployeeIDDropDownList.DataBind();
                 EmployeeIDDropDownList.Items.Insert(0, new ListItem("Select EmployeeID", "0"));
             }      
@@ -46,57 +46,62 @@ namespace PioneerTech.WebApp.UI
 
         protected void PersonalDetailsSaveButton_Click(object sender, EventArgs e)
         {
-            SaveDate();
+            SaveData();
         }
 
         protected void EmployeeIDDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;            
-            EmployeeObj = EmployeeDALObj.GetPersonalData(SelectedEmployeeID);
+            string selectedEmployeeID = EmployeeIDDropDownList.SelectedValue;            
+            employeeObj = employeeDataAccessLayerObject.GetPersonalData(selectedEmployeeID);
 
-            EmployeeIDHiddenField.Value = EmployeeObj.EmployeeID.ToString();
-            FirstNameTextBox.Text = EmployeeObj.FirstName;
-            LastNameTextBox.Text = EmployeeObj.LastName;
-            EmailIDTextBox.Text = EmployeeObj.EmailID;
-            MobileNumberTextBox.Text = EmployeeObj.MobileNumber;
-            AlternateMobileNumberTextBox.Text = EmployeeObj.AlternateMobileNumber;
-            AddressLine1TextBox.Text = EmployeeObj.AddressLine1;
-            AddressLine2TextBox.Text = EmployeeObj.AddressLine2;
-            StateTextBox.Text = EmployeeObj.AddressState;
-            CountryTextBox.Text = EmployeeObj.AddressCountry;
-            ZipCodeTextBox.Text = EmployeeObj.AddressZipCode;
-            HomeCountryTextBox.Text = EmployeeObj.HomeCountry;
+            EmployeeIDHiddenField.Value = employeeObj.EmployeeID.ToString();
+            FirstNameTextBox.Text = employeeObj.FirstName;
+            LastNameTextBox.Text = employeeObj.LastName;
+            EmailIDTextBox.Text = employeeObj.EmailID;
+            MobileNumberTextBox.Text = employeeObj.MobileNumber;
+            AlternateMobileNumberTextBox.Text = employeeObj.AlternateMobileNumber;
+            AddressLine1TextBox.Text = employeeObj.AddressLine1;
+            AddressLine2TextBox.Text = employeeObj.AddressLine2;
+            StateTextBox.Text = employeeObj.AddressState;
+            CountryTextBox.Text = employeeObj.AddressCountry;
+            ZipCodeTextBox.Text = employeeObj.AddressZipCode;
+            HomeCountryTextBox.Text = employeeObj.HomeCountry;
 
             PersonalDetailsSaveButton.Visible = false;
+
+            if(selectedEmployeeID.Equals("0"))
+            {
+                PersonalDetailsSaveButton.Visible = true;
+            }
         }
 
         protected void PersonalDetailsEditButton_Click(object sender, EventArgs e)
         {
-            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            if (EmployeeID == 0)
+            int employeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (employeeID == 0)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('To Edit: Please select an EmployeeID first!!'); window.location='" + Request.ApplicationPath + "UI/EmployeeDetails.aspx';", true);
             }
             else
-                SaveDate();
+                SaveData();
         }
 
-        protected void SaveDate()
+        protected void SaveData()
         {
             string returnValue;
-            EmployeeObj.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            EmployeeObj.FirstName = FirstNameTextBox.Text;
-            EmployeeObj.LastName = LastNameTextBox.Text;
-            EmployeeObj.EmailID = EmailIDTextBox.Text;
-            EmployeeObj.MobileNumber = MobileNumberTextBox.Text;
-            EmployeeObj.AlternateMobileNumber = AlternateMobileNumberTextBox.Text;
-            EmployeeObj.AddressLine1 = AddressLine1TextBox.Text;
-            EmployeeObj.AddressLine2 = AddressLine2TextBox.Text;
-            EmployeeObj.AddressState = StateTextBox.Text;
-            EmployeeObj.AddressCountry = CountryTextBox.Text;
-            EmployeeObj.AddressZipCode = ZipCodeTextBox.Text;
-            EmployeeObj.HomeCountry = HomeCountryTextBox.Text;
-            returnValue = EmployeeDALObj.SaveEmployeePersonalDetails(EmployeeObj);
+            employeeObj.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            employeeObj.FirstName = FirstNameTextBox.Text;
+            employeeObj.LastName = LastNameTextBox.Text;
+            employeeObj.EmailID = EmailIDTextBox.Text;
+            employeeObj.MobileNumber = MobileNumberTextBox.Text;
+            employeeObj.AlternateMobileNumber = AlternateMobileNumberTextBox.Text;
+            employeeObj.AddressLine1 = AddressLine1TextBox.Text;
+            employeeObj.AddressLine2 = AddressLine2TextBox.Text;
+            employeeObj.AddressState = StateTextBox.Text;
+            employeeObj.AddressCountry = CountryTextBox.Text;
+            employeeObj.AddressZipCode = ZipCodeTextBox.Text;
+            employeeObj.HomeCountry = HomeCountryTextBox.Text;
+            returnValue = employeeDataAccessLayerObject.SaveEmployeePersonalDetails(employeeObj);
 
             if (returnValue.Equals("1"))
             {

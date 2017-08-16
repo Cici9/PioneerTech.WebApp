@@ -11,18 +11,18 @@ namespace PioneerTech.WebApp.UI
 {
     public partial class EducationDetails : System.Web.UI.Page
     {
-        private EmployeeDataAccessLayer EmployeeDataAccessLayerObj;
-        private Educational EducationalObj;
+        private EmployeeDataAccessLayer employeeDataAccessLayerObject;
+        private Educational educationalObject;
         protected void Page_Load(object sender, EventArgs e)
         {
-            EmployeeDataAccessLayerObj = new EmployeeDataAccessLayer();
-            EducationalObj = new Educational();
+            employeeDataAccessLayerObject = new EmployeeDataAccessLayer();
+            educationalObject = new Educational();
 
             if (!IsPostBack)
             {
                 EmployeeIDDropDownList.DataTextField = "EmployeeID";
                 EmployeeIDDropDownList.DataValueField = "EmployeeID";
-                EmployeeIDDropDownList.DataSource = EmployeeDataAccessLayerObj.GetEmployeeID();
+                EmployeeIDDropDownList.DataSource = employeeDataAccessLayerObject.GetEmployeeID();
                 EmployeeIDDropDownList.DataBind();
                 EmployeeIDDropDownList.Items.Insert(0, new ListItem("Select EmployeeID", "0"));
             }
@@ -30,19 +30,19 @@ namespace PioneerTech.WebApp.UI
 
         protected void EmployeeIDDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
-            string EmployeeName = EmployeeDataAccessLayerObj.GetEmployeeName(SelectedEmployeeID);
+            string selectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
+            string employeeName = employeeDataAccessLayerObject.GetEmployeeName(selectedEmployeeID);
 
             SelectedEmployeeLabel.Visible = true;
-            SelectedEmployeeName.Text = EmployeeName;
+            SelectedEmployeeName.Text = employeeName;
             SelectedEmployeeName.Visible = true;
 
-            EducationalObj = EmployeeDataAccessLayerObj.GetEducationData(SelectedEmployeeID);
+            educationalObject = employeeDataAccessLayerObject.GetEducationData(selectedEmployeeID);
 
-            EmployeeIDHiddenField.Value = SelectedEmployeeID.ToString();
-            CourseTypeTextBox.Text = EducationalObj.CourseType;
-            CourseSpecializaionTextBox.Text = EducationalObj.CourseSpecialization;
-            CourseYearOfPassingTextBox.Text = EducationalObj.CourseYearofPassing;
+            EmployeeIDHiddenField.Value = selectedEmployeeID.ToString();
+            CourseTypeTextBox.Text = educationalObject.CourseType;
+            CourseSpecializaionTextBox.Text = educationalObject.CourseSpecialization;
+            CourseYearOfPassingTextBox.Text = educationalObject.CourseYearofPassing;
         }
 
         protected void EducationDetailsResetButton_Click(object sender, EventArgs e)
@@ -55,8 +55,8 @@ namespace PioneerTech.WebApp.UI
 
         protected void EducationDetailsSaveButton_Click(object sender, EventArgs e)
         {
-            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            if (EmployeeID == 0)
+            int employeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (employeeID == 0)
             {
                 Response.Write("<script>alert('Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/EducationDetails.aspx';</script>");
             }
@@ -67,8 +67,8 @@ namespace PioneerTech.WebApp.UI
 
         protected void EducationDetailsEditButton_Click(object sender, EventArgs e)
         {
-            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            if (EmployeeID == 0)
+            int employeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (employeeID == 0)
             {
                 Response.Write("<script>alert('To Edit: Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/EducationDetails.aspx';</script>");
             }
@@ -80,12 +80,12 @@ namespace PioneerTech.WebApp.UI
         {
             string returnValue;
 
-            EducationalObj.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            EducationalObj.CourseType = CourseTypeTextBox.Text;
-            EducationalObj.CourseSpecialization = CourseSpecializaionTextBox.Text;
-            EducationalObj.CourseYearofPassing = CourseYearOfPassingTextBox.Text;
+            educationalObject.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            educationalObject.CourseType = CourseTypeTextBox.Text;
+            educationalObject.CourseSpecialization = CourseSpecializaionTextBox.Text;
+            educationalObject.CourseYearofPassing = CourseYearOfPassingTextBox.Text;
 
-            returnValue = EmployeeDataAccessLayerObj.SaveEmployeeEducationDetails(EducationalObj);
+            returnValue = employeeDataAccessLayerObject.SaveEmployeeEducationDetails(educationalObject);
 
             if (returnValue.Equals("1"))
             {

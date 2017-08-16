@@ -11,19 +11,19 @@ namespace PioneerTech.WebApp.UI
 {
     public partial class ProjectDetails : System.Web.UI.Page
     {
-        private EmployeeDataAccessLayer EmployeeDataAccessLayerObj;
-        private Project ProjectObj;
+        private EmployeeDataAccessLayer employeeDataAccessLayerObject;
+        private Project projectObject;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            EmployeeDataAccessLayerObj = new EmployeeDataAccessLayer();
-            ProjectObj = new Project();
+            employeeDataAccessLayerObject = new EmployeeDataAccessLayer();
+            projectObject = new Project();
 
             if(!IsPostBack)
             {
                 EmployeeIDDropDownList.DataTextField = "EmployeeID";
                 EmployeeIDDropDownList.DataValueField = "EmployeeID";
-                EmployeeIDDropDownList.DataSource = EmployeeDataAccessLayerObj.GetEmployeeID();
+                EmployeeIDDropDownList.DataSource = employeeDataAccessLayerObject.GetEmployeeID();
                 EmployeeIDDropDownList.DataBind();
                 EmployeeIDDropDownList.Items.Insert(0, new ListItem("Select EmployeeID", "0"));
             }
@@ -31,20 +31,20 @@ namespace PioneerTech.WebApp.UI
 
         protected void EmployeeIDDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
-            string EmployeeName = EmployeeDataAccessLayerObj.GetEmployeeName(SelectedEmployeeID);
+            string selectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
+            string employeeName = employeeDataAccessLayerObject.GetEmployeeName(selectedEmployeeID);
 
             SelectedEmployeeLabel.Visible = true;
-            SelectedEmployeeName.Text = EmployeeName;
+            SelectedEmployeeName.Text = employeeName;
             SelectedEmployeeName.Visible = true;
 
-            ProjectObj = EmployeeDataAccessLayerObj.GetProjectData(SelectedEmployeeID);
+            projectObject = employeeDataAccessLayerObject.GetProjectData(selectedEmployeeID);
 
-            EmployeeIDHiddenField.Value = SelectedEmployeeID.ToString();
-            ProjectNameTextBox.Text = ProjectObj.ProjectName;
-            ClientNameTextBox.Text = ProjectObj.ClientName;
-            ProjectLocationTextBox.Text = ProjectObj.ProjectLocation;
-            ProjectRolesTextBox.Text = ProjectObj.ProjectRoles;
+            EmployeeIDHiddenField.Value = selectedEmployeeID.ToString();
+            ProjectNameTextBox.Text = projectObject.ProjectName;
+            ClientNameTextBox.Text = projectObject.ClientName;
+            ProjectLocationTextBox.Text = projectObject.ProjectLocation;
+            ProjectRolesTextBox.Text = projectObject.ProjectRoles;
         }
 
         protected void ProjectDetailsResetButton_Click(object sender, EventArgs e)
@@ -58,8 +58,8 @@ namespace PioneerTech.WebApp.UI
 
         protected void ProjectDetailsSaveButton_Click1(object sender, EventArgs e)
         {
-            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            if (EmployeeID == 0)
+            int employeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (employeeID == 0)
             {
                 Response.Write("<script>alert('Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/ProjectDetails.aspx';</script>");
             }
@@ -69,8 +69,8 @@ namespace PioneerTech.WebApp.UI
 
         protected void ProjectDetailsEditButton_Click1(object sender, EventArgs e)
         {
-            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            if (EmployeeID == 0)
+            int employeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if (employeeID == 0)
             {
                 Response.Write("<script>alert('To Edit: Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/ProjectDetails.aspx';</script>");
             }
@@ -82,13 +82,13 @@ namespace PioneerTech.WebApp.UI
         {
             string returnValue;
 
-            ProjectObj.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            ProjectObj.ProjectName = ProjectNameTextBox.Text;
-            ProjectObj.ClientName = ClientNameTextBox.Text;
-            ProjectObj.ProjectLocation = ProjectLocationTextBox.Text;
-            ProjectObj.ProjectRoles = ProjectRolesTextBox.Text;
+            projectObject.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            projectObject.ProjectName = ProjectNameTextBox.Text;
+            projectObject.ClientName = ClientNameTextBox.Text;
+            projectObject.ProjectLocation = ProjectLocationTextBox.Text;
+            projectObject.ProjectRoles = ProjectRolesTextBox.Text;
 
-            returnValue = EmployeeDataAccessLayerObj.SaveEmployeeProjectDetails(ProjectObj);
+            returnValue = employeeDataAccessLayerObject.SaveEmployeeProjectDetails(projectObject);
 
             if (returnValue.Equals("1"))
             {

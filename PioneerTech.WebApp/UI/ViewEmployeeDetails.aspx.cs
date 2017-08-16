@@ -12,7 +12,7 @@ namespace PioneerTech.WebApp.UI
     public partial class ViewEmployeeDetails : System.Web.UI.Page
     {
         //private string EmployeeID;
-        private EmployeeDataAccessLayer EmployeeDALObj;
+        private EmployeeDataAccessLayer employeeDataAccessLayerObject;
         //private List<Employee> EmployeeData;
         //private List<Company> CompanyData;
         //private List<Project> ProjectData;
@@ -20,12 +20,12 @@ namespace PioneerTech.WebApp.UI
         //private List<Educational> EducationData;
         protected void Page_Load(object sender, EventArgs e)
         {
-            EmployeeDALObj = new EmployeeDataAccessLayer();
+            employeeDataAccessLayerObject = new EmployeeDataAccessLayer();
             if (!IsPostBack)
             {
                 EmployeeIDDropDownList.DataTextField = "EmployeeID";
                 EmployeeIDDropDownList.DataValueField = "EmployeeID";
-                EmployeeIDDropDownList.DataSource = EmployeeDALObj.GetEmployeeID();
+                EmployeeIDDropDownList.DataSource = employeeDataAccessLayerObject.GetEmployeeID();
                 EmployeeIDDropDownList.DataBind();
                 EmployeeIDDropDownList.Items.Insert(0, new ListItem("Select EmployeeID", "0"));
             }
@@ -33,16 +33,16 @@ namespace PioneerTech.WebApp.UI
 
         protected void EmployeeIDDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
-            EmployeeDataAccessLayer EmployeeDataAccessLayerObj = new EmployeeDataAccessLayer();
+            string selectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
+            EmployeeDataAccessLayer employeeDataAccessLayerObject = new EmployeeDataAccessLayer();
  
-            PersonalDetailsGridView.DataSource = EmployeeDataAccessLayerObj.ViewEmployeeData(SelectedEmployeeID);
+            PersonalDetailsGridView.DataSource = employeeDataAccessLayerObject.ViewEmployeeData(selectedEmployeeID);
             PersonalDetailsGridView.DataBind();
 
-            CompanyDetailsGridView.DataSource = EmployeeDataAccessLayerObj.ViewCompanyData(SelectedEmployeeID);
+            CompanyDetailsGridView.DataSource = employeeDataAccessLayerObject.ViewCompanyData(selectedEmployeeID);
             CompanyDetailsGridView.DataBind();
 
-            ProjectDetailsGridView.DataSource = EmployeeDataAccessLayerObj.ViewProjectData(SelectedEmployeeID);
+            ProjectDetailsGridView.DataSource = employeeDataAccessLayerObject.ViewProjectData(selectedEmployeeID);
             ProjectDetailsGridView.DataBind();
         }
     }

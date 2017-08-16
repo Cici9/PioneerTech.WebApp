@@ -11,17 +11,17 @@ namespace PioneerTech.WebApp.UI
 {
     public partial class CompanyDetails : System.Web.UI.Page
     {
-        private Company CompanyObj;
-        private EmployeeDataAccessLayer EmployeeDALObj;
+        private Company companyObject;
+        private EmployeeDataAccessLayer employeeDataAccessLayerObject;
         protected void Page_Load(object sender, EventArgs e)
         {
-            CompanyObj = new Company();
-            EmployeeDALObj = new EmployeeDataAccessLayer();
+            companyObject = new Company();
+            employeeDataAccessLayerObject = new EmployeeDataAccessLayer();
             if (!IsPostBack)
             {
                 EmployeeIDDropDownList.DataTextField = "EmployeeID";
                 EmployeeIDDropDownList.DataValueField = "EmployeeID";
-                EmployeeIDDropDownList.DataSource = EmployeeDALObj.GetEmployeeID();
+                EmployeeIDDropDownList.DataSource = employeeDataAccessLayerObject.GetEmployeeID();
                 EmployeeIDDropDownList.DataBind();
                 EmployeeIDDropDownList.Items.Insert(0, new ListItem("Select EmployeeID", "0"));
             }
@@ -30,20 +30,20 @@ namespace PioneerTech.WebApp.UI
 
         protected void EmployeeIDDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string SelectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
-            string EmployeeName = EmployeeDALObj.GetEmployeeName(SelectedEmployeeID);
+            string selectedEmployeeID = EmployeeIDDropDownList.SelectedValue;
+            string employeeName = employeeDataAccessLayerObject.GetEmployeeName(selectedEmployeeID);
 
             SelectedEmployeeLabel.Visible = true;
-            SelectedEmployeeName.Text = EmployeeName;
+            SelectedEmployeeName.Text = employeeName;
             SelectedEmployeeName.Visible = true;
 
-            CompanyObj = EmployeeDALObj.GetCompanyData(SelectedEmployeeID);            
+            companyObject = employeeDataAccessLayerObject.GetCompanyData(selectedEmployeeID);            
 
-            EmployeeIDHiddenField.Value = SelectedEmployeeID.ToString();
-            CompanyNameTextBox.Text = CompanyObj.CompanyName;
-            CompanyContactNumberTextBox.Text = CompanyObj.CompanyContactNumber;
-            CompanyLocationTextBox.Text = CompanyObj.CompanyLocation;
-            CompanyWebsiteTextBox.Text = CompanyObj.CompanyWebsite;
+            EmployeeIDHiddenField.Value = selectedEmployeeID.ToString();
+            CompanyNameTextBox.Text = companyObject.CompanyName;
+            CompanyContactNumberTextBox.Text = companyObject.CompanyContactNumber;
+            CompanyLocationTextBox.Text = companyObject.CompanyLocation;
+            CompanyWebsiteTextBox.Text = companyObject.CompanyWebsite;
         }
 
         protected void CompanyDetailsResetButton_Click(object sender, EventArgs e)
@@ -57,8 +57,8 @@ namespace PioneerTech.WebApp.UI
 
         protected void CompanyDetailsSaveButton_Click(object sender, EventArgs e)
         {
-            int EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            if(EmployeeID == 0)
+            int employeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            if(employeeID == 0)
             {
                 Response.Write("<script>alert('Please select an EmployeeID first!!'); window.location = '" + Request.ApplicationPath + "UI/CompanyDetails.aspx'; document.getElementById('EmployeeIDDropDownList').focus();</script>");
             }
@@ -70,13 +70,13 @@ namespace PioneerTech.WebApp.UI
         {
             string returnValue;
 
-            CompanyObj.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
-            CompanyObj.CompanyName = CompanyNameTextBox.Text;
-            CompanyObj.CompanyContactNumber = CompanyContactNumberTextBox.Text;
-            CompanyObj.CompanyLocation = CompanyLocationTextBox.Text;
-            CompanyObj.CompanyWebsite = CompanyWebsiteTextBox.Text;
+            companyObject.EmployeeID = Convert.ToInt32(EmployeeIDHiddenField.Value);
+            companyObject.CompanyName = CompanyNameTextBox.Text;
+            companyObject.CompanyContactNumber = CompanyContactNumberTextBox.Text;
+            companyObject.CompanyLocation = CompanyLocationTextBox.Text;
+            companyObject.CompanyWebsite = CompanyWebsiteTextBox.Text;
 
-            returnValue = EmployeeDALObj.SaveEmployeeCompanyDetails(CompanyObj);
+            returnValue = employeeDataAccessLayerObject.SaveEmployeeCompanyDetails(companyObject);
 
             if (returnValue.Equals("1"))
             {

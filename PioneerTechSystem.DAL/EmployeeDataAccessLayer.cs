@@ -14,14 +14,14 @@ namespace PioneerTechSystem.DAL
     {
         private SqlConnection sqlConnection;
         private SqlCommand sqlCommand;
-        public List<Employee> EmployeeData;
-        public List<Company> CompanyData;
-        public List<Project> ProjectData;
+        public List<Employee> employeeData;
+        public List<Company> companyData;
+        public List<Project> projectData;
 
         // Opening Connection
         private SqlConnection OpenConnection()
         {
-            SqlConnection sqlConnection = new SqlConnection("server =.; Initial Catalog = PioneerTechConsultancySystem; Integrated Security = true");
+            SqlConnection sqlConnection = new SqlConnection("server =ABIJIT; Initial Catalog = PioneerTechConsultancySystem; Integrated Security = true");
             sqlConnection.Open();
             return sqlConnection;
         }
@@ -33,7 +33,7 @@ namespace PioneerTechSystem.DAL
         }
 
         // Save Employee Personal Details
-        public string SaveEmployeePersonalDetails(Employee EmployeeObj)
+        public string SaveEmployeePersonalDetails(Employee employeeObj)
         {
             try
             {
@@ -44,20 +44,21 @@ namespace PioneerTechSystem.DAL
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.CommandText = "uspSaveEmployeePersonalDetails";
 
-                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = EmployeeObj.EmployeeID;
-                sqlCommand.Parameters.Add("@FirstName", SqlDbType.VarChar).Value = EmployeeObj.FirstName;
-                sqlCommand.Parameters.Add("@LastName", SqlDbType.VarChar).Value = EmployeeObj.LastName;
-                sqlCommand.Parameters.Add("@EmailID", SqlDbType.VarChar).Value = EmployeeObj.EmailID;
-                sqlCommand.Parameters.Add("@MobileNumber", SqlDbType.VarChar).Value = EmployeeObj.MobileNumber;
-                sqlCommand.Parameters.Add("@AlternateMobileNumber", SqlDbType.VarChar).Value = EmployeeObj.AlternateMobileNumber;
-                sqlCommand.Parameters.Add("@AddressLine1", SqlDbType.VarChar).Value = EmployeeObj.AddressLine1;
-                sqlCommand.Parameters.Add("@AddressLine2", SqlDbType.VarChar).Value = EmployeeObj.AddressLine2;
-                sqlCommand.Parameters.Add("@State", SqlDbType.VarChar).Value = EmployeeObj.AddressState;
-                sqlCommand.Parameters.Add("@Country", SqlDbType.VarChar).Value = EmployeeObj.AddressCountry;
-                sqlCommand.Parameters.Add("@ZipCode", SqlDbType.VarChar).Value = EmployeeObj.AddressZipCode;
-                sqlCommand.Parameters.Add("@HomeCountry", SqlDbType.VarChar).Value = EmployeeObj.HomeCountry;
+                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = employeeObj.EmployeeID;
+                sqlCommand.Parameters.Add("@FirstName", SqlDbType.VarChar).Value = employeeObj.FirstName;
+                sqlCommand.Parameters.Add("@LastName", SqlDbType.VarChar).Value = employeeObj.LastName;
+                sqlCommand.Parameters.Add("@EmailID", SqlDbType.VarChar).Value = employeeObj.EmailID;
+                sqlCommand.Parameters.Add("@MobileNumber", SqlDbType.VarChar).Value = employeeObj.MobileNumber;
+                sqlCommand.Parameters.Add("@AlternateMobileNumber", SqlDbType.VarChar).Value = employeeObj.AlternateMobileNumber;
+                sqlCommand.Parameters.Add("@AddressLine1", SqlDbType.VarChar).Value = employeeObj.AddressLine1;
+                sqlCommand.Parameters.Add("@AddressLine2", SqlDbType.VarChar).Value = employeeObj.AddressLine2;
+                sqlCommand.Parameters.Add("@State", SqlDbType.VarChar).Value = employeeObj.AddressState;
+                sqlCommand.Parameters.Add("@Country", SqlDbType.VarChar).Value = employeeObj.AddressCountry;
+                sqlCommand.Parameters.Add("@ZipCode", SqlDbType.VarChar).Value = employeeObj.AddressZipCode;
+                sqlCommand.Parameters.Add("@HomeCountry", SqlDbType.VarChar).Value = employeeObj.HomeCountry;
                 
                 returnValue = sqlCommand.ExecuteNonQuery().ToString();
+                sqlCommand.Dispose();
                 return returnValue;
             }
             catch (Exception ex)
@@ -67,13 +68,12 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
 
         // Save Employee Company Details
-        public string SaveEmployeeCompanyDetails(Company CompanyObj)
+        public string SaveEmployeeCompanyDetails(Company companyObj)
         {
             try
             {
@@ -84,13 +84,14 @@ namespace PioneerTechSystem.DAL
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.CommandText = "uspSaveEmployeeCompanyDetails";
 
-                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = CompanyObj.EmployeeID;
-                sqlCommand.Parameters.Add("@CompanyName", SqlDbType.VarChar).Value = CompanyObj.CompanyName;
-                sqlCommand.Parameters.Add("@CompanyContactNumber", SqlDbType.VarChar).Value = CompanyObj.CompanyContactNumber;
-                sqlCommand.Parameters.Add("@CompanyLocation", SqlDbType.VarChar).Value = CompanyObj.CompanyLocation;
-                sqlCommand.Parameters.Add("@CompanyWebsite", SqlDbType.VarChar).Value = CompanyObj.CompanyWebsite;
+                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = companyObj.EmployeeID;
+                sqlCommand.Parameters.Add("@CompanyName", SqlDbType.VarChar).Value = companyObj.CompanyName;
+                sqlCommand.Parameters.Add("@CompanyContactNumber", SqlDbType.VarChar).Value = companyObj.CompanyContactNumber;
+                sqlCommand.Parameters.Add("@CompanyLocation", SqlDbType.VarChar).Value = companyObj.CompanyLocation;
+                sqlCommand.Parameters.Add("@CompanyWebsite", SqlDbType.VarChar).Value = companyObj.CompanyWebsite;
 
                 returnValue = sqlCommand.ExecuteNonQuery().ToString();
+                sqlCommand.Dispose();
                 return returnValue;
             }
             catch (Exception ex)
@@ -100,14 +101,13 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
 
 
         // Save Employee Project Details
-        public string SaveEmployeeProjectDetails(Project ProjectObj)
+        public string SaveEmployeeProjectDetails(Project projectObj)
         {
             try
             {
@@ -118,14 +118,15 @@ namespace PioneerTechSystem.DAL
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.CommandText = "uspSaveEmployeeProjectDetails";
 
-                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = ProjectObj.EmployeeID;
-                sqlCommand.Parameters.Add("@ProjectName", SqlDbType.VarChar).Value = ProjectObj.ProjectName;
-                sqlCommand.Parameters.Add("@ClientName", SqlDbType.VarChar).Value = ProjectObj.ClientName;
-                sqlCommand.Parameters.Add("@ProjectLocation", SqlDbType.VarChar).Value = ProjectObj.ProjectLocation;
-                sqlCommand.Parameters.Add("@ProjectRoles", SqlDbType.VarChar).Value = ProjectObj.ProjectRoles;
+                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = projectObj.EmployeeID;
+                sqlCommand.Parameters.Add("@ProjectName", SqlDbType.VarChar).Value = projectObj.ProjectName;
+                sqlCommand.Parameters.Add("@ClientName", SqlDbType.VarChar).Value = projectObj.ClientName;
+                sqlCommand.Parameters.Add("@ProjectLocation", SqlDbType.VarChar).Value = projectObj.ProjectLocation;
+                sqlCommand.Parameters.Add("@ProjectRoles", SqlDbType.VarChar).Value = projectObj.ProjectRoles;
 
                 returnVaue = sqlCommand.ExecuteNonQuery().ToString();
 
+                sqlCommand.Dispose();
                 return returnVaue;
             }
             catch (Exception ex)
@@ -134,13 +135,12 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
 
         // Save Employee Technical Details
-        public string SaveEmployeeTechnicalDetails(Technical TechnicalObj)
+        public string SaveEmployeeTechnicalDetails(Technical technicalObj)
         {
             try
             {
@@ -151,14 +151,15 @@ namespace PioneerTechSystem.DAL
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.CommandText = "uspSaveEmployeeTechnicalDetails";
 
-                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = TechnicalObj.EmployeeID;
-                sqlCommand.Parameters.Add("@ProgrammingLanguages", SqlDbType.VarChar).Value = TechnicalObj.ProgrammingLanguages;
-                sqlCommand.Parameters.Add("@DatabasesKnown", SqlDbType.VarChar).Value = TechnicalObj.DatabasesKnown;
-                sqlCommand.Parameters.Add("@ORMTechnologies", SqlDbType.VarChar).Value = TechnicalObj.ORMTechnologies;
-                sqlCommand.Parameters.Add("@UITechnologies", SqlDbType.VarChar).Value = TechnicalObj.UITechnologies;
+                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = technicalObj.EmployeeID;
+                sqlCommand.Parameters.Add("@ProgrammingLanguages", SqlDbType.VarChar).Value = technicalObj.ProgrammingLanguages;
+                sqlCommand.Parameters.Add("@DatabasesKnown", SqlDbType.VarChar).Value = technicalObj.DatabasesKnown;
+                sqlCommand.Parameters.Add("@ORMTechnologies", SqlDbType.VarChar).Value = technicalObj.ORMTechnologies;
+                sqlCommand.Parameters.Add("@UITechnologies", SqlDbType.VarChar).Value = technicalObj.UITechnologies;
 
                 returnVaue = sqlCommand.ExecuteNonQuery().ToString();
 
+                sqlCommand.Dispose();
                 return returnVaue;
             }
             catch (Exception ex)
@@ -167,13 +168,12 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
 
         // Save Employee Education Details
-        public string SaveEmployeeEducationDetails(Educational EducationalObj)
+        public string SaveEmployeeEducationDetails(Educational educationalObj)
         {
             try
             {
@@ -184,13 +184,14 @@ namespace PioneerTechSystem.DAL
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.CommandText = "uspSaveEmployeeEducationalDetails";
 
-                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = EducationalObj.EmployeeID;
-                sqlCommand.Parameters.Add("@CourseType", SqlDbType.VarChar).Value = EducationalObj.CourseType;
-                sqlCommand.Parameters.Add("@CourseSpecialization", SqlDbType.VarChar).Value = EducationalObj.CourseSpecialization;
-                sqlCommand.Parameters.Add("@CourseYearOfPassing", SqlDbType.VarChar).Value = EducationalObj.CourseYearofPassing;
+                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = educationalObj.EmployeeID;
+                sqlCommand.Parameters.Add("@CourseType", SqlDbType.VarChar).Value = educationalObj.CourseType;
+                sqlCommand.Parameters.Add("@CourseSpecialization", SqlDbType.VarChar).Value = educationalObj.CourseSpecialization;
+                sqlCommand.Parameters.Add("@CourseYearOfPassing", SqlDbType.VarChar).Value = educationalObj.CourseYearofPassing;
 
                 returnVaue = sqlCommand.ExecuteNonQuery().ToString();
 
+                sqlCommand.Dispose();
                 return returnVaue;
             }
             catch (Exception ex)
@@ -199,13 +200,12 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
 
         // Get particular Employee Name
-        public string GetEmployeeName(string EmployeeID)
+        public string GetEmployeeName(string employeeID)
         {
             try
             {
@@ -216,15 +216,16 @@ namespace PioneerTechSystem.DAL
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.CommandText = "uspGetEmployeeName";
 
-                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = EmployeeID;
+                sqlCommand.Parameters.Add("@EmployeeID", SqlDbType.VarChar).Value = employeeID;
 
-                SqlDataReader GetNameReader = sqlCommand.ExecuteReader();
+                SqlDataReader nameReader = sqlCommand.ExecuteReader();
 
-                while (GetNameReader.Read())
+                while (nameReader.Read())
                 {
-                    EmployeeName = GetNameReader.GetString(GetNameReader.GetOrdinal("LastName")) + ", " + GetNameReader.GetString(GetNameReader.GetOrdinal("FirstName"));
+                    EmployeeName = nameReader.GetString(nameReader.GetOrdinal("LastName")) + ", " + nameReader.GetString(nameReader.GetOrdinal("FirstName"));
                 }
 
+                sqlCommand.Dispose();
                 return EmployeeName;
             }
             catch (Exception ex)
@@ -233,7 +234,6 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
@@ -244,23 +244,22 @@ namespace PioneerTechSystem.DAL
             try
             {
                 sqlConnection = OpenConnection();
-                EmployeeData = new List<Employee>();
+                employeeData = new List<Employee>();
                 sqlCommand = new SqlCommand();
                 sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.CommandText = "uspGetEmployeeIDDetails";
 
-                SqlDataReader EmployeeDetailsReader = sqlCommand.ExecuteReader();
+                SqlDataReader employeeIDReader = sqlCommand.ExecuteReader();
 
-                while (EmployeeDetailsReader.Read())
+                while (employeeIDReader.Read())
                 {
-                    int id = EmployeeDetailsReader.GetInt32(EmployeeDetailsReader.GetOrdinal("EmployeeID"));
-                    EmployeeData.Add(new Employee() { EmployeeID = EmployeeDetailsReader.GetInt32(EmployeeDetailsReader.GetOrdinal("EmployeeID")) });
+                    employeeData.Add(new Employee() { EmployeeID = employeeIDReader.GetInt32(employeeIDReader.GetOrdinal("EmployeeID")) });
                 }
-                EmployeeDetailsReader.Close();
+                employeeIDReader.Close();
 
-                //EmployeeData = EmployeeData.Where(data => data != null).ToList();
-                return EmployeeData;
+                sqlCommand.Dispose();
+                return employeeData;
             }
             catch (Exception ex)
             {
@@ -269,44 +268,44 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
 
         // Get Personal Details Table Values
-        public Employee GetPersonalData(string EmployeeID)
+        public Employee GetPersonalData(string employeeID)
         {
             try
             {
                 sqlConnection = OpenConnection();
-                Employee SelectedEmployee = new Employee();
+                Employee selectedEmployee = new Employee();
                 sqlCommand = new SqlCommand();
                 sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.CommandText = "uspGetEmployeePersonalDetails";
 
-                sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(EmployeeID);
+                sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(employeeID);
 
-                SqlDataReader EmployeeDetailsReader = sqlCommand.ExecuteReader();
+                SqlDataReader personalDetailsReader = sqlCommand.ExecuteReader();
 
-                while (EmployeeDetailsReader.Read())
+                while (personalDetailsReader.Read())
                 {
-                    SelectedEmployee.EmployeeID = EmployeeDetailsReader.GetInt32(EmployeeDetailsReader.GetOrdinal("EmployeeID"));
-                    SelectedEmployee.FirstName = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("FirstName"));
-                    SelectedEmployee.LastName = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("LastName"));
-                    SelectedEmployee.EmailID = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("EmailID"));
-                    SelectedEmployee.MobileNumber = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("MobileNumber"));
-                    SelectedEmployee.AlternateMobileNumber = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("AlternateMobileNumber"));
-                    SelectedEmployee.AddressLine1 = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("AddressLine1"));
-                    SelectedEmployee.AddressLine2 = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("AddressLine2"));
-                    SelectedEmployee.AddressState = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("AddressState"));
-                    SelectedEmployee.AddressCountry = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("AddressCountry"));
-                    SelectedEmployee.AddressZipCode = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("AddressState"));
-                    SelectedEmployee.HomeCountry = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("HomeCountry"));
+                    selectedEmployee.EmployeeID = personalDetailsReader.GetInt32(personalDetailsReader.GetOrdinal("EmployeeID"));
+                    selectedEmployee.FirstName = personalDetailsReader.GetString(personalDetailsReader.GetOrdinal("FirstName"));
+                    selectedEmployee.LastName = personalDetailsReader.GetString(personalDetailsReader.GetOrdinal("LastName"));
+                    selectedEmployee.EmailID = personalDetailsReader.GetString(personalDetailsReader.GetOrdinal("EmailID"));
+                    selectedEmployee.MobileNumber = personalDetailsReader.GetString(personalDetailsReader.GetOrdinal("MobileNumber"));
+                    selectedEmployee.AlternateMobileNumber = personalDetailsReader.GetString(personalDetailsReader.GetOrdinal("AlternateMobileNumber"));
+                    selectedEmployee.AddressLine1 = personalDetailsReader.GetString(personalDetailsReader.GetOrdinal("AddressLine1"));
+                    selectedEmployee.AddressLine2 = personalDetailsReader.GetString(personalDetailsReader.GetOrdinal("AddressLine2"));
+                    selectedEmployee.AddressState = personalDetailsReader.GetString(personalDetailsReader.GetOrdinal("AddressState"));
+                    selectedEmployee.AddressCountry = personalDetailsReader.GetString(personalDetailsReader.GetOrdinal("AddressCountry"));
+                    selectedEmployee.AddressZipCode = personalDetailsReader.GetString(personalDetailsReader.GetOrdinal("AddressState"));
+                    selectedEmployee.HomeCountry = personalDetailsReader.GetString(personalDetailsReader.GetOrdinal("HomeCountry"));
                 }
-                EmployeeDetailsReader.Close();
-                return SelectedEmployee;
+                personalDetailsReader.Close();
+                sqlCommand.Dispose();
+                return selectedEmployee;
             }
             catch (Exception)
             {
@@ -315,13 +314,12 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
 
         // Get Company Details Table Values
-        public Company GetCompanyData(string EmployeeID)
+        public Company GetCompanyData(string employeeID)
         {
             try
             {
@@ -332,19 +330,20 @@ namespace PioneerTechSystem.DAL
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.CommandText = "uspGetEmployeeCompanyDetails";
 
-                sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(EmployeeID);
+                sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(employeeID);
 
-                SqlDataReader CompanyDetailsReader = sqlCommand.ExecuteReader();
+                SqlDataReader companyDetailsReader = sqlCommand.ExecuteReader();
 
-                while (CompanyDetailsReader.Read())
+                while (companyDetailsReader.Read())
                 {
-                    employeeCompany.EmployeeID = CompanyDetailsReader.GetInt32(CompanyDetailsReader.GetOrdinal("EmployeeID"));
-                    employeeCompany.CompanyName = CompanyDetailsReader.GetString(CompanyDetailsReader.GetOrdinal("CompanyName"));
-                    employeeCompany.CompanyContactNumber = CompanyDetailsReader.GetString(CompanyDetailsReader.GetOrdinal("CompanyContactNumber"));
-                    employeeCompany.CompanyLocation = CompanyDetailsReader.GetString(CompanyDetailsReader.GetOrdinal("CompanyLocation"));
-                    employeeCompany.CompanyWebsite = CompanyDetailsReader.GetString(CompanyDetailsReader.GetOrdinal("CompanyWebsite"));
+                    employeeCompany.EmployeeID = companyDetailsReader.GetInt32(companyDetailsReader.GetOrdinal("EmployeeID"));
+                    employeeCompany.CompanyName = companyDetailsReader.GetString(companyDetailsReader.GetOrdinal("CompanyName"));
+                    employeeCompany.CompanyContactNumber = companyDetailsReader.GetString(companyDetailsReader.GetOrdinal("CompanyContactNumber"));
+                    employeeCompany.CompanyLocation = companyDetailsReader.GetString(companyDetailsReader.GetOrdinal("CompanyLocation"));
+                    employeeCompany.CompanyWebsite = companyDetailsReader.GetString(companyDetailsReader.GetOrdinal("CompanyWebsite"));
                 }
-                CompanyDetailsReader.Close();
+                companyDetailsReader.Close();
+                sqlCommand.Dispose();
                 return employeeCompany;
             }
             catch (Exception)
@@ -354,13 +353,12 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
 
         // Get Company Details Table Values
-        public Project GetProjectData(string EmployeeID)
+        public Project GetProjectData(string employeeID)
         {
             try
             {
@@ -371,20 +369,21 @@ namespace PioneerTechSystem.DAL
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.CommandText = "uspGetEmployeeProjectDetails";
 
-                sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(EmployeeID);
+                sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(employeeID);
 
-                SqlDataReader ProjectDetailsReader = sqlCommand.ExecuteReader();
+                SqlDataReader projectDetailsReader = sqlCommand.ExecuteReader();
 
-                while (ProjectDetailsReader.Read())
+                while (projectDetailsReader.Read())
                 {
-                    employeeProject.ProjectID = ProjectDetailsReader.GetInt32(ProjectDetailsReader.GetOrdinal("ProjectID"));
-                    employeeProject.ProjectName = ProjectDetailsReader.GetString(ProjectDetailsReader.GetOrdinal("ProjectName"));
-                    employeeProject.ClientName = ProjectDetailsReader.GetString(ProjectDetailsReader.GetOrdinal("ClientName"));
-                    employeeProject.ProjectLocation = ProjectDetailsReader.GetString(ProjectDetailsReader.GetOrdinal("ProjectLocation"));
-                    employeeProject.ProjectRoles = ProjectDetailsReader.GetString(ProjectDetailsReader.GetOrdinal("ProjectRoles"));
-                    employeeProject.EmployeeID = ProjectDetailsReader.GetInt32(ProjectDetailsReader.GetOrdinal("EmployeeID"));
+                    employeeProject.ProjectID = projectDetailsReader.GetInt32(projectDetailsReader.GetOrdinal("ProjectID"));
+                    employeeProject.ProjectName = projectDetailsReader.GetString(projectDetailsReader.GetOrdinal("ProjectName"));
+                    employeeProject.ClientName = projectDetailsReader.GetString(projectDetailsReader.GetOrdinal("ClientName"));
+                    employeeProject.ProjectLocation = projectDetailsReader.GetString(projectDetailsReader.GetOrdinal("ProjectLocation"));
+                    employeeProject.ProjectRoles = projectDetailsReader.GetString(projectDetailsReader.GetOrdinal("ProjectRoles"));
+                    employeeProject.EmployeeID = projectDetailsReader.GetInt32(projectDetailsReader.GetOrdinal("EmployeeID"));
                 }
-                ProjectDetailsReader.Close();
+                projectDetailsReader.Close();
+                sqlCommand.Dispose();
                 return employeeProject;
             }
             catch (Exception)
@@ -394,13 +393,12 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
 
         // Get Technical Details Table Values
-        public Technical GetTechnicalData(string EmployeeID)
+        public Technical GetTechnicalData(string employeeID)
         {
             try
             {
@@ -411,19 +409,19 @@ namespace PioneerTechSystem.DAL
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.CommandText = "uspGetEmployeeTechnicalDetails";
 
-                sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(EmployeeID);
+                sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(employeeID);
 
-                SqlDataReader TechnicalDetailsReader = sqlCommand.ExecuteReader();
+                SqlDataReader technicalDetailsReader = sqlCommand.ExecuteReader();
 
-                while (TechnicalDetailsReader.Read())
+                while (technicalDetailsReader.Read())
                 {
-                    employeeTechnical.EmployeeID = TechnicalDetailsReader.GetInt32(TechnicalDetailsReader.GetOrdinal("EmployeeID"));
-                    employeeTechnical.ProgrammingLanguages = TechnicalDetailsReader.GetString(TechnicalDetailsReader.GetOrdinal("ProgrammingLanguages"));
-                    employeeTechnical.DatabasesKnown = TechnicalDetailsReader.GetString(TechnicalDetailsReader.GetOrdinal("DatabasesKnown"));
-                    employeeTechnical.ORMTechnologies = TechnicalDetailsReader.GetString(TechnicalDetailsReader.GetOrdinal("ORMTechnologies"));
-                    employeeTechnical.UITechnologies = TechnicalDetailsReader.GetString(TechnicalDetailsReader.GetOrdinal("UITechnologies"));
+                    employeeTechnical.EmployeeID = technicalDetailsReader.GetInt32(technicalDetailsReader.GetOrdinal("EmployeeID"));
+                    employeeTechnical.ProgrammingLanguages = technicalDetailsReader.GetString(technicalDetailsReader.GetOrdinal("ProgrammingLanguages"));
+                    employeeTechnical.DatabasesKnown = technicalDetailsReader.GetString(technicalDetailsReader.GetOrdinal("DatabasesKnown"));
+                    employeeTechnical.ORMTechnologies = technicalDetailsReader.GetString(technicalDetailsReader.GetOrdinal("ORMTechnologies"));
+                    employeeTechnical.UITechnologies = technicalDetailsReader.GetString(technicalDetailsReader.GetOrdinal("UITechnologies"));
                 }
-                TechnicalDetailsReader.Close();
+                technicalDetailsReader.Close();
                 return employeeTechnical;
             }
             catch (Exception)
@@ -433,13 +431,12 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
 
         // Get Education Details Table Values
-        public Educational GetEducationData(string EmployeeID)
+        public Educational GetEducationData(string employeeID)
         {
             try
             {
@@ -450,18 +447,18 @@ namespace PioneerTechSystem.DAL
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.CommandText = "uspGetEmployeeEducationalDetails";
 
-                sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(EmployeeID);
+                sqlCommand.Parameters.Add("EmployeeID", SqlDbType.Int).Value = Convert.ToInt32(employeeID);
 
-                SqlDataReader EducationDetailsReader = sqlCommand.ExecuteReader();
+                SqlDataReader educationDetailsReader = sqlCommand.ExecuteReader();
 
-                while (EducationDetailsReader.Read())
+                while (educationDetailsReader.Read())
                 {
-                    employeeEducation.EmployeeID = EducationDetailsReader.GetInt32(EducationDetailsReader.GetOrdinal("EmployeeID"));
-                    employeeEducation.CourseType = EducationDetailsReader.GetString(EducationDetailsReader.GetOrdinal("CourseType"));
-                    employeeEducation.CourseSpecialization = EducationDetailsReader.GetString(EducationDetailsReader.GetOrdinal("CourseSpecialization"));
-                    employeeEducation.CourseYearofPassing = EducationDetailsReader.GetString(EducationDetailsReader.GetOrdinal("CourseYearOfPassing"));
+                    employeeEducation.EmployeeID = educationDetailsReader.GetInt32(educationDetailsReader.GetOrdinal("EmployeeID"));
+                    employeeEducation.CourseType = educationDetailsReader.GetString(educationDetailsReader.GetOrdinal("CourseType"));
+                    employeeEducation.CourseSpecialization = educationDetailsReader.GetString(educationDetailsReader.GetOrdinal("CourseSpecialization"));
+                    employeeEducation.CourseYearofPassing = educationDetailsReader.GetString(educationDetailsReader.GetOrdinal("CourseYearOfPassing"));
                 }
-                EducationDetailsReader.Close();
+                educationDetailsReader.Close();
                 return employeeEducation;
             }
             catch (Exception)
@@ -477,21 +474,21 @@ namespace PioneerTechSystem.DAL
         }
 
         // To Display values        
-        public List<Employee> ViewEmployeeData(string EmployeeID)
+        public List<Employee> ViewEmployeeData(string employeeID)
         {
             try
             {
                 sqlConnection = OpenConnection();
-                EmployeeData = new List<Employee>();
-                string DisplayPersonalQuery = "SELECT FirstName, LastName, EmailID, MobileNumber, AddressState as State FROM EmployeePersonalDetails where EmployeeID = '" + EmployeeID + "'";
-                sqlCommand = new SqlCommand(DisplayPersonalQuery, sqlConnection);
-                SqlDataReader EmployeeDetailsReader = sqlCommand.ExecuteReader();
-                while (EmployeeDetailsReader.Read())
+                employeeData = new List<Employee>();
+                string getPersonalInformationQuery = "SELECT FirstName, LastName, EmailID, MobileNumber, AddressState as State FROM EmployeePersonalDetails where EmployeeID = '" + employeeID + "'";
+                sqlCommand = new SqlCommand(getPersonalInformationQuery, sqlConnection);
+                SqlDataReader employeeDetailsReader = sqlCommand.ExecuteReader();
+                while (employeeDetailsReader.Read())
                 {
-                    EmployeeData.Add(new Employee() { FirstName = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("FirstName")), LastName = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("LastName")), EmailID = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("EmailID")), MobileNumber = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("MobileNumber")), AddressState = EmployeeDetailsReader.GetString(EmployeeDetailsReader.GetOrdinal("LastName")) });
+                    employeeData.Add(new Employee() { FirstName = employeeDetailsReader.GetString(employeeDetailsReader.GetOrdinal("FirstName")), LastName = employeeDetailsReader.GetString(employeeDetailsReader.GetOrdinal("LastName")), EmailID = employeeDetailsReader.GetString(employeeDetailsReader.GetOrdinal("EmailID")), MobileNumber = employeeDetailsReader.GetString(employeeDetailsReader.GetOrdinal("MobileNumber")), AddressState = employeeDetailsReader.GetString(employeeDetailsReader.GetOrdinal("LastName")) });
                 }
-                EmployeeDetailsReader.Close();
-                return EmployeeData;
+                employeeDetailsReader.Close();
+                return employeeData;
             }
             catch (Exception)
             {
@@ -500,25 +497,24 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
-        public List<Company> ViewCompanyData(string EmployeeID)
+        public List<Company> ViewCompanyData(string employeeID)
         {
             try
             {
                 sqlConnection = OpenConnection();
-                CompanyData = new List<Company>();
-                string DisplayCompanyQuery = "SELECT CompanyName, CompanyContactNumber, CompanyLocation, CompanyWebsite FROM EmployeeCompanyDetails where EmployeeID = '" + EmployeeID + "'";
-                sqlCommand = new SqlCommand(DisplayCompanyQuery, sqlConnection);
-                SqlDataReader CompanyDetailsReader = sqlCommand.ExecuteReader();
-                while (CompanyDetailsReader.Read())
+                companyData = new List<Company>();
+                string getCompanyInformationQuery = "SELECT CompanyName, CompanyContactNumber, CompanyLocation, CompanyWebsite FROM EmployeeCompanyDetails where EmployeeID = '" + employeeID + "'";
+                sqlCommand = new SqlCommand(getCompanyInformationQuery, sqlConnection);
+                SqlDataReader companyDetailsReader = sqlCommand.ExecuteReader();
+                while (companyDetailsReader.Read())
                 {
-                    CompanyData.Add(new Company() { CompanyName = CompanyDetailsReader.GetString(CompanyDetailsReader.GetOrdinal("CompanyName")), CompanyContactNumber = CompanyDetailsReader.GetString(CompanyDetailsReader.GetOrdinal("CompanyContactNumber")), CompanyLocation = CompanyDetailsReader.GetString(CompanyDetailsReader.GetOrdinal("CompanyLocation")), CompanyWebsite = CompanyDetailsReader.GetString(CompanyDetailsReader.GetOrdinal("CompanyWebsite")) });
+                    companyData.Add(new Company() { CompanyName = companyDetailsReader.GetString(companyDetailsReader.GetOrdinal("CompanyName")), CompanyContactNumber = companyDetailsReader.GetString(companyDetailsReader.GetOrdinal("CompanyContactNumber")), CompanyLocation = companyDetailsReader.GetString(companyDetailsReader.GetOrdinal("CompanyLocation")), CompanyWebsite = companyDetailsReader.GetString(companyDetailsReader.GetOrdinal("CompanyWebsite")) });
                 }
                 
-                return CompanyData;
+                return companyData;
             }
             catch (Exception)
             {
@@ -527,7 +523,6 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
@@ -536,17 +531,17 @@ namespace PioneerTechSystem.DAL
             try
             {
                 sqlConnection = OpenConnection();
-                ProjectData = new List<Project>();
-                string DisplayProjectQuery = "SELECT ProjectName, ClientName, ProjectLocation, ProjectRoles FROM EmployeeProjectDetails where EmployeeID = '" + EmployeeID + "'";
-                sqlCommand = new SqlCommand(DisplayProjectQuery, sqlConnection);
-                SqlDataReader ProjectDetailsReader = sqlCommand.ExecuteReader();
-                while (ProjectDetailsReader.Read())
+                projectData = new List<Project>();
+                string getProjectInformationQuery = "SELECT ProjectName, ClientName, ProjectLocation, ProjectRoles FROM EmployeeProjectDetails where EmployeeID = '" + EmployeeID + "'";
+                sqlCommand = new SqlCommand(getProjectInformationQuery, sqlConnection);
+                SqlDataReader projectDetailsReader = sqlCommand.ExecuteReader();
+                while (projectDetailsReader.Read())
                 {
-                    ProjectData.Add(new Project() { ProjectName = ProjectDetailsReader.GetString(ProjectDetailsReader.GetOrdinal("ProjectName")), ClientName = ProjectDetailsReader.GetString(ProjectDetailsReader.GetOrdinal("ClientName")), ProjectLocation = ProjectDetailsReader.GetString(ProjectDetailsReader.GetOrdinal("ProjectLocation")), ProjectRoles = ProjectDetailsReader.GetString(ProjectDetailsReader.GetOrdinal("ProjectRoles")) });
+                    projectData.Add(new Project() { ProjectName = projectDetailsReader.GetString(projectDetailsReader.GetOrdinal("ProjectName")), ClientName = projectDetailsReader.GetString(projectDetailsReader.GetOrdinal("ClientName")), ProjectLocation = projectDetailsReader.GetString(projectDetailsReader.GetOrdinal("ProjectLocation")), ProjectRoles = projectDetailsReader.GetString(projectDetailsReader.GetOrdinal("ProjectRoles")) });
                 }
 
                 CloseConnection(sqlConnection);
-                return ProjectData;
+                return projectData;
             }
             catch (Exception)
             {
@@ -555,7 +550,6 @@ namespace PioneerTechSystem.DAL
             }
             finally
             {
-                sqlCommand.Dispose();
                 CloseConnection(sqlConnection);
             }
         }
