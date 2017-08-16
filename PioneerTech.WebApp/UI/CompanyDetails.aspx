@@ -45,6 +45,9 @@
             <td id="CompanyContactNumberTextBoxColumn">
                 <asp:textbox runat="server" ID="CompanyContactNumberTextBox"></asp:textbox>
             </td>
+            <td>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter a valid Mobile Number!! [xxx-xxx-xxxx]" Font-Italic="True" ControlToValidate="CompanyContactNumberTextBox" ForeColor="#FF3300" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"></asp:RegularExpressionValidator>
+            </td>
         </tr>
         <tr id="CompanyLocationRow">
             <td id="CompanyLocationLabelColumn">
@@ -61,6 +64,11 @@
             </td>
             <td id="CompanyWebsiteTextBoxColumn">
                 <asp:textbox runat="server" ID="CompanyWebsiteTextBox"></asp:textbox>
+            </td>
+            <td>
+
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Enter a valid Website!!" ControlToValidate="CompanyWebsiteTextBox" Font-Italic="True" ForeColor="#FF3300" ValidationExpression="(http(s)?://)?([\w-]+\.)+[\w-]+(/[\w- ./?%&amp;=]*)?"></asp:RegularExpressionValidator>
+
             </td>
         </tr>
         

@@ -50,8 +50,10 @@
                 <asp:textbox runat="server" ID="EmailIDTextBox"></asp:textbox>
             </td>
             <td>
-
                 <asp:RequiredFieldValidator ID="EmailIDValidator" runat="server" ControlToValidate="EmailIDTextBox" ErrorMessage="EmailID is Mandatory!!" Font-Italic="True" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+
+            &nbsp;<br />
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="EmailIDTextBox" ErrorMessage="Please enter a valid Email ID!!" Font-Italic="True" ForeColor="#FF3300" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
 
             </td>
         </tr>
@@ -65,6 +67,9 @@
             <td>
 
                 <asp:RequiredFieldValidator ID="MobileNumberValidator0" runat="server" ControlToValidate="MobileNumberTextBox" ErrorMessage="Mobile Number is Mandatory!!" Font-Italic="True" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+
+                <br />
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="MobileNumberTextBox" ErrorMessage="Enter a valid US Mobile number!! [xxx-xxx-xxxx]" Font-Italic="True" ForeColor="#FF3300" ValidationExpression="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"></asp:RegularExpressionValidator>
 
             </td>
         </tr>
